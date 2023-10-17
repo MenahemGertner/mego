@@ -1,0 +1,21 @@
+<company>
+    <employee>
+        <ID>1234</ID>
+        <name>Roni</name>
+        <email>Roni@gmail.com</email>
+        <phone>050-5387685</phone>
+    </employee>
+    <employee>
+        <ID>8768</ID>
+        <name>Erik</name>
+        <email>Erik@gmail.com</email>
+        <phone>050-8374585</phone>
+    </employee>
+    <employee>
+        <ID>8745</ID>
+        <name>Haim</name>
+        <email>Haim@gmail.com</email>
+        <phone>050-5835877</phone>
+    </employee>
+</company>
+ 

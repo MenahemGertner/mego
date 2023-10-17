@@ -1,0 +1,28 @@
+<head>
+<style>
+.box {
+width: 49%;
+border: solid;
+}
+.content {
+padding: 25px;
+}
+</style>
+</head>
+<body>
+<h3>This header is not styled with CSS</h3>
+<div class="box">
+<div class="content">
+<p>This is box 1 content</p>
+<p>This is box 1 content</p>
+<p>This is box 1 content</p>
+</div>
+</div>
+<div class="box">
+<div class="content">
+<p>This is box 2 content</p>
+<p>This is box 2 content</p>
+<p>This is box 2 content</p>
+</div>
+</div>
+</body>

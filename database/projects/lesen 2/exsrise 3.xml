@@ -1,0 +1,32 @@
+<terminal>
+    <flight>
+        <flight_number></flight_number>
+        <pilot></pilot>
+        <source></source>
+        <target></target>
+        <times>
+            <the_mirror></the_mirror>
+            <landing></landing>
+        </times>
+    </flight>
+    <flight>
+        <flight_number></flight_number>
+        <pilot></pilot>
+        <source></source>
+        <target></target>
+        <times>
+            <the_mirror></the_mirror>
+            <landing></landing>
+        </times>
+    </flight>
+    <flight>
+        <flight_number></flight_number>
+        <pilot></pilot>
+        <source></source>
+        <target></target>
+        <times>
+            <the_mirror></the_mirror>
+            <landing></landing>
+        </times>
+    </flight>
+</terminal>

@@ -1,0 +1,110 @@
+/*---------------------box----------------------------*/
+.box {
+	display: inline-block;
+	font-size: 25px;
+	width: 49%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.content {
+	padding: 25px;
+}
+.product {
+	display: inline-block;
+	font-size: 25px;
+	width: 90%;
+	vertical-align: middle;
+	text-align: center;
+	border: 0px solid;
+}
+
+
+/*---------------------media----------------------------*/
+@media (max-width:700px)
+
+/*At less of 700px width*/
+	{
+	.box {
+		width: 100%
+			/*u_1_2 width is 100% instead of 50% */
+	}
+}
+
+/*---------------------header----------------------------*/
+.header {
+	
+	text-align: center;
+	font-size: 50px;
+	margin: 25px;
+	color: rgb(2, 84, 26);
+	position: relative;
+	  
+}
+
+/*---------------------button----------------------------*/
+button {
+	font-size: 20px;
+	padding: 10px;
+	border: 2px solid;
+	margin-top: 20px;
+	color: rgb(1, 59, 41);
+	background-color: rgb(221, 232, 226);
+}
+button:hover {
+	border: 0px solid;
+	display: inline-block;
+	background-color: rgb(1, 50, 32);
+}
+
+
+/*---------------------image----------------------------*/
+
+  .centered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+  }
+
+
+img {
+	text-align: center;
+	font-style: italic;
+	font-size: 14px;
+	width: 100%;
+	border: 2px solid;
+	  
+	  
+}
+
+a {
+	text-decoration: none;
+	font-size: 25px;
+	color: rgb(1, 46, 14);
+}
+a:hover {
+	border: 0px solid;
+	display: inline-block;
+	background-color: rgb(236, 249, 244);
+}
+
+
+/*---------------------footer----------------------------*/
+.footer {
+	font-size: 20px;
+	text-align: center;
+
+}
+
+
+/*---------------------global----------------------------*/
+* {
+	direction: rtl;
+	/*Set the line height for the element*/
+	line-height: 150%;
+	/*The vertical-align property sets the vertical alignment of an element.*/
+	margin: 0;
+	word-spacing: 6px;
+}

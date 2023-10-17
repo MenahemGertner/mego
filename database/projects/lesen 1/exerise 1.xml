@@ -1,0 +1,20 @@
+<college>
+    <student>
+        <name>rami</name>
+        <citi>tel aviv</citi>
+        <birth>1994</birth>
+        <sorce_average>88%</sorce_average>
+    </student>
+    <student>
+        <name>rani</name>
+        <citi>tiberius</citi>
+        <birth>1998</birth>
+        <sorce_average>78%</sorce_average>
+    </student>
+    <student>
+        <name>romi</name>
+        <citi>jerusalem</citi>
+        <birth>2002</birth>
+        <sorce_average>82%</sorce_average>
+    </student>
+</college>
