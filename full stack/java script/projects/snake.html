@@ -43,6 +43,15 @@
         if (player_y == -20)
             player_y = 280;
 
+        if (pit_a == 300)
+            pit_a = 0;
+        if (pit_a == -20)
+            pit_a = 280;
+        if (pit_b == 300)
+            pit_b = 0;
+        if (pit_b == -20)
+            pit_b = 280;
+
         player_q = player_o; player_r = player_p; 
         player_o = player_m; player_p = player_n; 
         player_m = player_k; player_n = player_l; 
@@ -55,20 +64,34 @@
         
     
         if (direction == "right")
-            player_x += 20;
+            player_x += 20;           
         if (direction == "left")
-            player_x -= 20;
+            player_x -= 20;           
         if (direction == "down")
-            player_y += 20;
+            player_y += 20;         
         if (direction == "up")
             player_y -= 20;
+           
+        if (player_x % 100 == 0 || player_y % 100 == 0)
+            pit_direction = Math.floor(Math.random() * 4) + 1;
+        if (pit_direction == 1)
+            pit_a +=20;
+        if (pit_direction == 2)
+            pit_a -=20;
+        if (pit_direction == 3)
+            pit_b +=20;
+        if (pit_direction == 4)
+            pit_b -=20;
+
 
         ctx.fillStyle = "black";
         ctx.fillRect(player_x, player_y, 20, 20);
         ctx.fillStyle = "black";
         ctx.fillRect(player_a, player_b, 20, 20);
+
         
         if (player_x == apple_x && player_y == apple_y) {
+            audio_eat.play();
             score += 10;
             speed += 10;         
             apple_x = Math.floor(Math.random() * 14) * 20;
@@ -112,34 +135,57 @@
     
            
         if (speed == 90){
+            audio_succes.play();
             speed = 0;
             level += 1;
             fast -= 25;
+            direction = "";
+            obstacle_a = Math.floor(Math.random() * 14) * 20;
+            obstacle_b = Math.floor(Math.random() * 14) * 20;
+            obstacle_d = obstacle_b + 20;
+            obstacle_f = obstacle_b + 40;
+            obstacle_g = Math.floor(Math.random() * 14) * 20;
+            obstacle_h = Math.floor(Math.random() * 14) * 20;
+            obstacle_i = obstacle_g + 20;
+            obstacle_k = obstacle_g + 40;
         }
 
         if ((player_x == obstacle_a && player_y == obstacle_b)
-          ||(player_x == obstacle_c && player_y == obstacle_d)
-          ||(player_x == obstacle_e && player_y == obstacle_f)
+          ||(player_x == obstacle_a && player_y == obstacle_d)
+          ||(player_x == obstacle_a && player_y == obstacle_f)
           ||(player_x == obstacle_g && player_y == obstacle_h)
-          ||(player_x == obstacle_i && player_y == obstacle_j)
-          ||(player_x == obstacle_k && player_y == obstacle_l)
+          ||(player_x == obstacle_i && player_y == obstacle_h)
+          ||(player_x == obstacle_k && player_y == obstacle_h)
           ||(player_x == player_g && player_y == player_h && speed >= 30)
           ||(player_x == player_i && player_y == player_j && speed >= 40)
           ||(player_x == player_k && player_y == player_l && speed >= 50)
           ||(player_x == player_m && player_y == player_n && speed >= 60)
           ||(player_x == player_o && player_y == player_p && speed >= 70)
           ||(player_x == player_q && player_y == player_r && speed >= 80)
+          ||(player_x == pit_a && player_y == pit_b)
+          ||(player_a == pit_a && player_b == pit_b)
+          ||(player_c == pit_a && player_d == pit_b && speed >= 10)
+          ||(player_e == pit_a && player_f == pit_b && speed >= 20)
+          ||(player_g == pit_a && player_h == pit_b && speed >= 30)
+          ||(player_i == pit_a && player_j == pit_b && speed >= 40)
+          ||(player_k == pit_a && player_l == pit_b && speed >= 50)
+          ||(player_m == pit_a && player_n == pit_b && speed >= 60)
+          ||(player_o == pit_a && player_p == pit_b && speed >= 70)
+          ||(player_q == pit_a && player_r == pit_b && speed >= 80)
           ){
-            img.src = "boom.jpeg";
-            img.onload = function() {
-            ctx.drawImage(img, player_x, player_y, 20, 20);
+            img_boom.src = "boom.jpeg";
+            audio_boom.play();
+            img_boom.onload = function() {
+            ctx.drawImage(img_boom, player_x, player_y, 20, 20);
             direction = "";
+            pit_direction = "";
             score = 0;
             level = 1;
             setTimeout(function() {  
             player_x = 100; player_y = 100;
             apple_x = 40; apple_y = 40;
-            }, 800);}
+            pit_a = 60; pit_b = 140;
+            }, 2400);}
             fast = 200;
             speed = 0; 
             clearInterval(first_interval);
@@ -149,12 +195,13 @@
 
 
         if ((apple_x == obstacle_a && apple_y == obstacle_b)
-          ||(apple_x == obstacle_c && apple_y == obstacle_d)
-          ||(apple_x == obstacle_e && apple_y == obstacle_f)
+          ||(apple_x == obstacle_a && apple_y == obstacle_d)
+          ||(apple_x == obstacle_a && apple_y == obstacle_f)
           ||(apple_x == obstacle_g && apple_y == obstacle_h)
-          ||(apple_x == obstacle_i && apple_y == obstacle_j)
-          ||(apple_x == obstacle_k && apple_y == obstacle_l)){
-            apple_x = 40; apple_y = 40;
+          ||(apple_x == obstacle_i && apple_y == obstacle_h)
+          ||(apple_x == obstacle_k && apple_y == obstacle_h)){
+            apple_x = Math.floor(Math.random() * 14) * 20;
+            apple_y = Math.floor(Math.random() * 14) * 20;
           }
 
         if (record_score < score)
@@ -165,20 +212,15 @@
         document.getElementById("record_score_value").innerHTML = record_score;
         document.getElementById("level_value").innerHTML = level;
 
-        ctx.fillStyle = "gold";
-        ctx.fillRect(apple_x, apple_y, 20, 20); 
-        ctx.fillStyle = "brown";
-        ctx.fillRect(obstacle_a, obstacle_b, 20, 20);
-        ctx.fillStyle = "brown";
-        ctx.fillRect(obstacle_c, obstacle_d, 20, 20);
-        ctx.fillStyle = "brown";
-        ctx.fillRect(obstacle_e, obstacle_f, 20, 20);
-        ctx.fillStyle = "brown";
-        ctx.fillRect(obstacle_g, obstacle_h, 20, 20);
-        ctx.fillStyle = "brown";
-        ctx.fillRect(obstacle_i, obstacle_j, 20, 20);
-        ctx.fillStyle = "brown";
-        ctx.fillRect(obstacle_k, obstacle_l, 20, 20);      
+        ctx.drawImage(img_ball, apple_x, apple_y, 20, 20);     
+        ctx.drawImage(img_pokemon, pit_a, pit_b, 20, 20);
+        ctx.drawImage(img_fence, obstacle_a, obstacle_b, 20, 60);
+        ctx.drawImage(img_fence, obstacle_g, obstacle_h, 60, 20);
+       
+        
+        img_pokemon.src = "pokemon.jpeg";
+        img_ball.src = "ball.jpeg";
+        img_fence.src = "fence.jpeg";
     }
 
     //-----------------------------------------------------
@@ -189,21 +231,31 @@
     var player_k = 40; player_l = 100; player_m = 30; player_n = 100;
     var player_o = 20; player_p = 100; player_q = 10; player_r = 100;
 
-    var obstacle_a = 240; obstacle_b = 160; obstacle_c = 240;  
-    var obstacle_d = 180; obstacle_e = 240; obstacle_f = 200;
+    var obstacle_a = 240; obstacle_b = 160;  
+    var obstacle_d = 180; obstacle_f = 200;
+    var obstacle_g = 140; obstacle_h = 60;
+    var obstacle_i = 160; obstacle_k = 180;
+    var pit_a = 60; pit_b = 140;
 
-    var obstacle_g = 140; obstacle_h = 60; obstacle_i = 160;
-    var obstacle_j = 60; obstacle_k = 180; obstacle_l = 60;
-
-    var direction = "right"; direct = 0;
+    var direction = "right"; direct = 0; pit_direction = 1;
     var level = 1
     var score = 0; speed = 0; record_score = 0;
     var apple_x = 40; apple_y = 40;
     var interval = 200; fast = 200;
-    var img = new Image();
+
+    var img_boom = new Image();
+    var img_pokemon = new Image();
+    var img_ball = new Image();
+    var img_fence = new Image();
+    var audio_boom = new Audio('boom.mp3');
+    var audio_eat = new Audio('eat.mp3');
+    var audio_succes = new Audio('succes.mp3');
+
+
    
     var first_interval = setInterval(TimeEventHandler, interval);
    
     document.onkeydown = keyDownEventHandler;
+
 
 </script>

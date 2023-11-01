@@ -1,7 +1,14 @@
+import random
 
-for i in range(1, 101):
-    if i % 7 == 0 or i // 10 == 7 or i % 10 ==7:
-        i = "boom"
-    print(i)
+password = []
+letters = ['a', 'b', 'c']
+password.append(random.choice(letters))
+password.append(random.choice(letters))
+password.append(random.choice(letters))
+password.append(random.choice(letters))
+password.append(random.choice(letters))
+print(f"Before\n{password}")
+random.shuffle(password)
+print(f"\nAfter\n{password}")
 
 
