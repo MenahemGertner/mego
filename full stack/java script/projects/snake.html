@@ -9,16 +9,16 @@
 <script>
     //-----------------------------------------------------
     function keyDownEventHandler() {
-        if (event.keyCode == 40 && direction != "up" && direct!=0){
+        if (event.keyCode == 40 && direction != "up" && direct!=0 && wait == 0){
             direction = "down";
             direct = 0;}
-        if (event.keyCode == 38 && direction != "down" && direct!=0){
+        if (event.keyCode == 38 && direction != "down" && direct!=0 && wait == 0){
             direction = "up";
             direct = 0;}
-        if (event.keyCode == 37 && direction != "right" && direct!=0){
+        if (event.keyCode == 37 && direction != "right" && direct!=0 && wait == 0){
             direction = "left";
             direct = 0;}
-        if (event.keyCode == 39 && direction != "left" && direct!=0){
+        if (event.keyCode == 39 && direction != "left" && direct!=0 && wait == 0){
             direction = "right";
             direct = 0;}
     }
@@ -72,16 +72,10 @@
         if (direction == "up")
             player_y -= 20;
            
-        if (player_x % 100 == 0 || player_y % 100 == 0)
-            pit_direction = Math.floor(Math.random() * 4) + 1;
-        if (pit_direction == 1)
-            pit_a +=20;
-        if (pit_direction == 2)
-            pit_a -=20;
-        if (pit_direction == 3)
+        if (pit_a == player_x && wait ==0 && (player_x != 100 || player_y != 100))
             pit_b +=20;
-        if (pit_direction == 4)
-            pit_b -=20;
+        else if (wait ==0 && (player_x != 100 || player_y != 100))
+            pit_a +=20;
 
 
         ctx.fillStyle = "black";
@@ -172,26 +166,28 @@
           ||(player_m == pit_a && player_n == pit_b && speed >= 60)
           ||(player_o == pit_a && player_p == pit_b && speed >= 70)
           ||(player_q == pit_a && player_r == pit_b && speed >= 80)
-          ){
+          ){  
             img_boom.src = "boom.jpeg";
             audio_boom.play();
             img_boom.onload = function() {
             ctx.drawImage(img_boom, player_x, player_y, 20, 20);
-            direction = "";
-            pit_direction = "";
+            direction = ""; 
             score = 0;
             level = 1;
-            setTimeout(function() {  
+            wait = 1;
+            // game_over = alert ("Game over");       
+            setTimeout(function() { 
             player_x = 100; player_y = 100;
             apple_x = 40; apple_y = 40;
             pit_a = 60; pit_b = 140;
-            }, 2400);}
+            }, 2400);}  
             fast = 200;
             speed = 0; 
             clearInterval(first_interval);
             interval = 200;
-            first_interval = setInterval(TimeEventHandler, interval);      
-}
+            first_interval = setInterval(TimeEventHandler, interval);  
+            }
+            wait = 0;          
 
 
         if ((apple_x == obstacle_a && apple_y == obstacle_b)
@@ -218,7 +214,7 @@
         ctx.drawImage(img_fence, obstacle_g, obstacle_h, 60, 20);
        
         
-        img_pokemon.src = "pokemon.jpeg";
+        img_pokemon.src = "pokemon.jpg";
         img_ball.src = "ball.jpeg";
         img_fence.src = "fence.jpeg";
     }
@@ -237,8 +233,8 @@
     var obstacle_i = 160; obstacle_k = 180;
     var pit_a = 60; pit_b = 140;
 
-    var direction = "right"; direct = 0; pit_direction = 1;
-    var level = 1
+    var direction = "right"; direct = 0;
+    var level = 1; wait = 0;
     var score = 0; speed = 0; record_score = 0;
     var apple_x = 40; apple_y = 40;
     var interval = 200; fast = 200;

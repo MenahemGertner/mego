@@ -1,0 +1,319 @@
+<canvas id= "myCanvas" width="1250" height="650" style="border: 1px solid;"></canvas>
+<script>
+
+function man_moves(){
+
+    if (event.keyCode == 39 && man_x < 1220)
+        man_x += 20;
+
+    if (event.keyCode == 37 && man_x > 880)
+        man_x -= 20;
+
+
+}
+function rocket_aviation(){
+
+    ctx.drawImage(img_reka, 0, 0, 1250, 650);
+    ctx.drawImage(img_man, man_x, man_y, 40, 40);
+    ctx.drawImage(img_rocket, rocket_a, rocket_b, 7, 7);
+if (rocket_b > 100){
+    if (rocket_a < 175){
+    rocket_a += 1;
+    rocket_b -= 1;}
+    else if (rocket_a < 200){
+    rocket_a += 1.2;
+    rocket_b -= 0.8;}
+    else if (rocket_a < 225){
+    rocket_a += 1.4;
+    rocket_b -= 0.6;}
+
+    else if (rocket_a < 250){
+    rocket_a += 1.6;
+    rocket_b -= 0.4;}
+    else if (rocket_a < 275){
+    rocket_a += 1.8;
+    rocket_b -= 0.2;}
+    else if (rocket_a < 300){
+    rocket_a += 2;}
+    else if (rocket_a < 600){
+    rocket_a += 1.8;
+    rocket_b += 0.2;}
+    else if (rocket_a < 625){
+    rocket_a += 1.6;
+    rocket_b += 0.4;}
+    else if (rocket_a < 650){
+    rocket_a += 1.4;
+    rocket_b += 0.6;}
+    else if (rocket_a < 725){
+    rocket_a += 1.2;
+    rocket_b += 0.8;}
+    else {
+    rocket_a += 1;
+    rocket_b += 1.1;}}
+else{
+    if (rocket_a < 200){
+    rocket_a += 1.6;
+    rocket_b -= 0.4;}
+    else if (rocket_a < 225){
+    rocket_a += 1.8;
+    rocket_b -= 0.2;}
+    else if (rocket_a < 250){
+    rocket_a += 2;}
+    else if (rocket_a < 350){
+    rocket_a += 1.8;
+    rocket_b += 0.2;}
+    else if (rocket_a < 375){
+    rocket_a += 1.6;
+    rocket_b += 0.4;}
+    else if (rocket_a < 400){
+    rocket_a += 1.4;
+    rocket_b += 0.6;}
+    else if (rocket_a < 425){
+    rocket_a += 1.2;
+    rocket_b += 0.8;}
+    else {
+    rocket_a += 1;
+    rocket_b += 1.1;}
+}
+
+if (rocket_b > 650){
+    rocket_a = 0;
+    rocket_b = Math.floor(Math.random()* 650);}
+
+
+
+    ctx.drawImage(img_rocket, rocket_c, rocket_d, 7, 7);
+if (rocket_d > 100){
+    if (rocket_c < 175){
+    rocket_c += 1;
+    rocket_d -= 1;}
+    else if (rocket_c < 200){
+    rocket_c += 1.2;
+    rocket_d -= 0.8;}
+    else if (rocket_c < 225){
+    rocket_c += 1.4;
+    rocket_d -= 0.6;}
+
+    else if (rocket_c < 250){
+    rocket_c += 1.6;
+    rocket_d -= 0.4;}
+    else if (rocket_c < 275){
+    rocket_c += 1.8;
+    rocket_d -= 0.2;}
+    else if (rocket_c < 300){
+    rocket_c += 2;}
+    else if (rocket_c < 600){
+    rocket_c += 1.8;
+    rocket_d += 0.2;}
+    else if (rocket_c < 625){
+    rocket_c += 1.6;
+    rocket_d += 0.4;}
+    else if (rocket_c < 650){
+    rocket_c += 1.4;
+    rocket_d += 0.6;}
+    else if (rocket_c < 725){
+    rocket_c += 1.2;
+    rocket_d += 0.8;}
+    else {
+    rocket_c += 1;
+    rocket_d += 1.1;}}
+else{
+    if (rocket_c < 200){
+    rocket_c += 1.6;
+    rocket_d -= 0.4;}
+    else if (rocket_c < 225){
+    rocket_c += 1.8;
+    rocket_d -= 0.2;}
+    else if (rocket_c < 250){
+    rocket_c += 2;}
+    else if (rocket_c < 350){
+    rocket_c += 1.8;
+    rocket_d += 0.2;}
+    else if (rocket_c < 375){
+    rocket_c += 1.6;
+    rocket_d += 0.4;}
+    else if (rocket_c < 400){
+    rocket_c += 1.4;
+    rocket_d += 0.6;}
+    else if (rocket_c < 425){
+    rocket_c += 1.2;
+    rocket_d += 0.8;}
+    else {
+    rocket_c += 1;
+    rocket_d += 1.1;}
+}
+
+if (rocket_d > 670){
+    rocket_c = 0;
+    rocket_d = Math.floor(Math.random()* 650);}
+
+
+    ctx.drawImage(img_rocket, rocket_e, rocket_f, 7, 7);
+if (rocket_f > 100){
+    if (rocket_e < 175){
+    rocket_e += 1;
+    rocket_f -= 1;}
+    else if (rocket_e < 200){
+    rocket_e += 1.2;
+    rocket_f -= 0.8;}
+    else if (rocket_e < 225){
+    rocket_e += 1.4;
+    rocket_f -= 0.6;}
+
+    else if (rocket_e < 250){
+    rocket_e += 1.6;
+    rocket_f -= 0.4;}
+    else if (rocket_e < 275){
+    rocket_e += 1.8;
+    rocket_f -= 0.2;}
+    else if (rocket_e < 300){
+    rocket_e += 2;}
+    else if (rocket_e < 600){
+    rocket_e += 1.8;
+    rocket_f += 0.2;}
+    else if (rocket_e < 625){
+    rocket_e += 1.6;
+    rocket_f += 0.4;}
+    else if (rocket_e < 650){
+    rocket_e += 1.4;
+    rocket_f += 0.6;}
+    else if (rocket_e < 725){
+    rocket_e += 1.2;
+    rocket_f += 0.8;}
+    else {
+    rocket_e += 1;
+    rocket_f += 1.1;}}
+else{
+    if (rocket_e < 200){
+    rocket_e += 1.6;
+    rocket_f -= 0.4;}
+    else if (rocket_e < 225){
+    rocket_e += 1.8;
+    rocket_f -= 0.2;}
+    else if (rocket_e < 250){
+    rocket_e += 2;}
+    else if (rocket_e < 350){
+    rocket_e += 1.8;
+    rocket_f += 0.2;}
+    else if (rocket_e < 375){
+    rocket_e += 1.6;
+    rocket_f += 0.4;}
+    else if (rocket_e < 400){
+    rocket_e += 1.4;
+    rocket_f += 0.6;}
+    else if (rocket_e < 425){
+    rocket_e += 1.2;
+    rocket_f += 0.8;}
+    else {
+    rocket_e += 1;
+    rocket_f += 1.1;}
+}
+
+if (rocket_f > 1100){
+    rocket_e = 0;
+    rocket_f = Math.floor(Math.random()* 650);}
+
+
+    ctx.drawImage(img_rocket, rocket_g, rocket_h, 7, 7);
+if (rocket_h > 100){
+    if (rocket_g < 175){
+    rocket_g += 1;
+    rocket_h -= 1;}
+    else if (rocket_g < 200){
+    rocket_g += 1.2;
+    rocket_h -= 0.8;}
+    else if (rocket_g < 225){
+    rocket_g += 1.4;
+    rocket_h -= 0.6;}
+
+    else if (rocket_g < 250){
+    rocket_g += 1.6;
+    rocket_h -= 0.4;}
+    else if (rocket_g < 275){
+    rocket_g += 1.8;
+    rocket_h -= 0.2;}
+    else if (rocket_g < 300){
+    rocket_g += 2;}
+    else if (rocket_g < 600){
+    rocket_g += 1.8;
+    rocket_h += 0.2;}
+    else if (rocket_g < 625){
+    rocket_g += 1.6;
+    rocket_h += 0.4;}
+    else if (rocket_g < 650){
+    rocket_g += 1.4;
+    rocket_h += 0.6;}
+    else if (rocket_g < 725){
+    rocket_g += 1.2;
+    rocket_h += 0.8;}
+    else {
+    rocket_g += 1;
+    rocket_h += 1.1;}}
+else{
+    if (rocket_g < 200){
+    rocket_g += 1.6;
+    rocket_h -= 0.4;}
+    else if (rocket_g < 225){
+    rocket_g += 1.8;
+    rocket_h -= 0.2;}
+    else if (rocket_g < 250){
+    rocket_g += 2;}
+    else if (rocket_g < 350){
+    rocket_g += 1.8;
+    rocket_h += 0.2;}
+    else if (rocket_g < 375){
+    rocket_g += 1.6;
+    rocket_h += 0.4;}
+    else if (rocket_g < 400){
+    rocket_g += 1.4;
+    rocket_h += 0.6;}
+    else if (rocket_g < 425){
+    rocket_g += 1.2;
+    rocket_h += 0.8;}
+    else {
+    rocket_g += 1;
+    rocket_h += 1.1;}
+}
+
+if (rocket_h > 1150){
+    rocket_g = 0;
+    rocket_h = Math.floor(Math.random()* 650);}
+
+
+if ((rocket_a > man_x && rocket_a < man_x +40 && rocket_b > man_y && rocket_b < 650)||
+    (rocket_c > man_x && rocket_c < man_x +40 && rocket_d > man_y && rocket_d < 650)||
+    (rocket_e > man_x && rocket_e < man_x +40 && rocket_f > man_y && rocket_f < 650)||
+    (rocket_g > man_x && rocket_g < man_x +40 && rocket_h > man_y && rocket_h < 650)){
+    audio_boom.play();
+    score -= 1;
+    }
+
+img_rocket.src = "rocket.png";
+img_reka.src = "reka.jpeg";
+img_man.src = "man.png";
+
+}
+
+    var ctx = document.getElementById('myCanvas').getContext('2d');
+    var img_reka = new Image();
+    var img_man = new Image();
+    var img_rocket = new Image();
+    var rocket_a = 0; rocket_b = 500;
+    var img_rocket = new Image();
+    var rocket_c = 0; rocket_d = 500;
+    var img_rocket = new Image();
+    var rocket_e = 0; rocket_f = 500;
+    var img_rocket = new Image();
+    var rocket_g = 0; rocket_h = 500;
+    var man_x = 1100; man_y = 610;
+    var score = 0;
+
+    var audio_boom = new Audio('boom.mp3');
+   
+    set_interval = setInterval(rocket_aviation, 10);
+    document.onkeydown = man_moves;
+
+
+
+
+</script>

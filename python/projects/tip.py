@@ -1,18 +1,58 @@
+import ascii
+import function
 import os
-user = 0
-hi_proposal = 0
-hi_name = ""
 
-while user != 1:
-    name = input("Enter a name: ")
-    proposal = int(input("Enter a your proposal: "))
-    if proposal > hi_proposal:
-        hi_proposal = proposal
-        hi_name = name
-    back = input("Would you like to enter another contestant? (y/n) ")
-    if back == "y":
+new_user = 0
+
+# The opening of the program
+while new_user == 0:
+    start = input("\nTo start the machine press Enter: ")
+    if start == "":
         os.system('cls' if os.name == 'nt' else 'clear')
-        continue
-    else:
-        break
-print(f"The highest bid was given by: '{hi_name}' in the amount of '{hi_proposal}' NIS")
+        choice = input(f"\n{ascii.welcome}\n").casefold()
+
+        # Access to a technician
+        if choice == "off":
+            code = int(input("Please enter a code: "))
+            if code == 1234:
+                function.technician()
+
+        # Report generation
+        if choice == "report":
+            print(function.resources)
+
+        # Espresso selection
+        if choice == "espresso":
+            check = function.check_espresso()
+            if check == 1:
+                continue
+            left_to_pay = 1.5
+            pay = float(function.price(left_to_pay, choice))
+            if pay == 1:
+                continue
+            function.drinking_espresso()
+            function.success(choice)
+
+        # Latte selection
+        if choice == "latte":
+            check = function.check_latte()
+            if check == 1:
+                continue
+            left_to_pay = 2.5
+            pay = float(function.price(left_to_pay, choice))
+            if pay == 1:
+                continue
+            function.drinking_latte()
+            function.success(choice)
+
+        # Cappuccino selection
+        if choice == "cappuccino":
+            check = function.check_cappuccino()
+            if check == 1:
+                continue
+            left_to_pay = 3
+            pay = float(function.price(left_to_pay, choice))
+            if pay == 1:
+                continue
+            function.drinking_cappuccino()
+            function.success(choice)

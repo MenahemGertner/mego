@@ -1,5 +1,48 @@
 # a = [input() for i in range(int(input()))]
 # print(a)
+import webbrowser
+
+opening = '''                /|  /|  ---------------------------
+                ||__||  |  Welcome to the program  |
+               /   O O\__  for learning the 1,000  |
+              /          \ useful words in English |
+             /      \     \        easily!         |
+            /   _    \     \ ----------------------
+           /    |\____\     \      ||
+          /     | | | |\____/      ||
+         /       \| | | |/ |     __||
+        /  /  \   -------  |_____| ||
+       /   |   |           |       --|
+       |   |   |           |_____  --|
+       |  |_|_|_|          |     \----
+       /\                  |
+      / /\        |        /
+     / /  |       |       |
+ ___/ /   |       |       |
+|____/    c_c_c_C/ \C_c_c_c'''
+
+welcome = '''  (¯`·.¸¸.·´¯`·.¸¸.·´¯)
+  ( \                 / )
+ ( \ )               ( / )
+( ) (    Welcome!!    ) ( )
+ ( / )               ( \ )
+  ( /                 \ )
+   (_.·´¯`·.¸¸.·´¯`·.¸_)'''
+
+welcome_back = '''  (¯`·.¸¸.·´¯`·.¸¸.·´¯)
+  ( \                 / )
+ ( \ )               ( / )
+( ) (  Welcome back!! ) ( )
+ ( / )               ( \ )
+  ( /                 \ )
+   (_.·´¯`·.¸¸.·´¯`·.¸_)'''
+
+remote = '''           ⇓ After learning the meaning of the word ⇓
+ -----------------------------------------------------------------
+| Read the last words in English and its interpretation in Hebrew |
+|    and vice versa, read in Hebrew and translate to English!     |
+ -----------------------------------------------------------------'''
+
 words = ['ability', 'able', 'about', 'above', 'accept', 'according', 'account', 'across', 'act', 'action', 'activity',
          'actually', 'add', 'address', 'administration', 'admit', 'adult', 'affect', 'after', 'again', 'against', 'age',
          'agency', 'agent', 'ago', 'agree', 'agreement', 'ahead', 'air', 'all', 'allow', 'almost', 'alone', 'along',
@@ -93,49 +136,85 @@ new_words = []
 old_word = 0
 num = 0
 back = 0
+
+
 # Opening text and explanation of the program
-run = input("\nWelcome to the program for memorizing the 1,000 most common words in English.\n"
-            "The program will run word by word, and when you come across a word you don't know,\n"
-            "the program will stop to memorize the new word for you.\n"
-            "Each time you will have to make a sentence from the last three words you learned.\n"
-            "And in addition to that, after 7 times you will perform another repetition of the circumcision\n"
-            "Feeling ready? Press Enter to begin!"
-            "\nIf you have already started and you want to continue press y: ")
+print(f"\n{opening}")
+run = input("\nFeeling ready? Press Enter to begin!"
+            "\nIf you want to continue from the point where you left the program press 'y': ")
 if run == "":
-    print("\n\nWelcome!!")
+    print(f"\n\n{welcome}")
+
 # Return to the program from the last word of the previous use
 else:
-    back = (int(input("\n\nWelcome back!\n\nEnter word number are you holding?: \n")) - 1)
+    back = int(input(f"\n\n{welcome_back}\n\nEnter word index are you holding?: \n")) - 1
     num = back
+
 # A loop to go through all the words in the list one by one
 for i in range(back, len(words)):
     num += 1
+
     # A message of encouragement after 20 words from the list
     if i > 0 and i % 20 == 0:
-        print(f"You already know '{i}' words from the list!!!")
+        print(f"👏🏼👏🏼👏🏼 You already know '{i}' words from the list!!! 👏🏼👏🏼👏🏼")
     print(f"\nYour new word is:\n\n{num}. '{words[i]}'")
-    know = input("\nDo you know this word? If yes press 'y'. If you are not sure, press 'n'.\n\n")
-    if know == "y":
-        print("\nGreat!\n")
+    know = input("\nDo you know this word? If yes press Enter. If you are not sure, press 'n'.\n\n")
+    if know == "":
+        print("\nGreat!👌\n")
     else:
         # Creating a list of the unfamiliar words for repetition and memorization
         new_words.append(words[i])
         old_word += 1
+
         # Instructions for memorizing the new words
-        print(f"\nIn the first stage,\nyou can check the translation of the word: '{words[i]}' in the link: "
-              f"\nhttps://translate.google.co.il/?hl=iw&sl=en&tl=iw&text={words[i]}%0A&op=translate "
-              f"\n\nAfter learning the meaning of the word,"
-              f"\nplease write a sentence with the last new words: "
-              f"\n'{', '.join(new_words[-3:])}'")
+
+        chak = input("Write the new word and you can get its translation: ")
+        while True:
+            if chak.casefold() == words[i]:
+                break
+            else:
+                chak = input("Spell the word correctly again: ")
+
+        # chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
+        # webbrowser.get(chrome_path).open(
+        #     f"https://translate.google.co.il/?hl=iw&sl=en&tl=iw&text={words[i]}%0A&op=translate")
+
+        # edge_path = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe %s'
+        # webbrowser.get(edge_path).open(
+        #     f"https://translate.google.co.il/?hl=iw&sl=en&tl=iw&text={words[i]}%0A&op=translate")
+
+        webbrowser.open(f"https://translate.google.co.il/?hl=iw&sl=en&tl=iw&text={words[i]}%0A&op=translate")
+        print(f"___________________________________________________________\n\n\n\n\n\n\n\n\n\n{remote}"
+              f"\n\n\nThe last words: >>>>>----------------------->   '{', '.join(new_words[-3:])}'")
         if old_word >= 7:
-            print("And also the old word: '" + new_words[-7] + "'")
-        d = input()
-        # while d[0].islower():
-            # d = input("You must start the sentence with a capital letter! Please try again \n")
+            print("And also the old word: >>>>----------------->   '" + new_words[-7] + "'")
+
+        print(f"\n\n           If you forgot the meaning of one of the words,"
+              f"\nyou can write it down here and get its translation, Otherwise press Enter"
+              f"\n      ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓ ⇓")
+        translate = input()
+
+        while True:
+            if translate == "":
+                break
+            elif translate == "statistic":
+                left = 1000 - num
+                percentage = round((num - old_word) / num * 100)
+                print(f"Words you have already learned: {num}"
+                      f"\nWords still left: {left}"
+                      f"\nNew words you learned: {old_word}"
+                      f"\nPercentage of words you knew: {percentage}%\n")
+                break
+            else:
+                webbrowser.open(f"https://translate.google.co.il/?hl=iw&sl=en&tl=iw&text={translate}%0A&op=translate")
+                translate = input("You can check another word again. If you wish to continue press Enter ")
+
         print("\nExcellent! Now that you have memorized the word well, "
-              "you can move on to the next word!")
+              "you can move on to the next word!👉")
+
         # A message of encouragement after learning 10 new words
         if old_word % 5 == 0:
-            print(f"Wow!! Today you already learned '{old_word}' new words!!!")
+            print(f"👏🏼👏🏼👏🏼 Wow!! Today you already learned '{old_word}' new words!!! 👏🏼👏🏼👏🏼")
+
 # End of the program
 print("Well done!! You have successfully learned all the words!!!!")

@@ -1,32 +1,32 @@
 <terminal>
     <flight>
-        <flight_number></flight_number>
-        <pilot></pilot>
-        <source></source>
-        <target></target>
+        <flight_number>1</flight_number>
+        <pilot>dani</pilot>
+        <source>lisbon</source>
+        <target>tel aviv</target>
         <times>
-            <the_mirror></the_mirror>
-            <landing></landing>
+            <the_mirror>12:00</the_mirror>
+            <landing>15:30</landing>
         </times>
     </flight>
     <flight>
-        <flight_number></flight_number>
-        <pilot></pilot>
-        <source></source>
-        <target></target>
+        <flight_number>2</flight_number>
+        <pilot>moshe</pilot>
+        <source>prag</source>
+        <target>ankra</target>
         <times>
-            <the_mirror></the_mirror>
-            <landing></landing>
+            <the_mirror>22:05</the_mirror>
+            <landing>00:15</landing>
         </times>
     </flight>
     <flight>
-        <flight_number></flight_number>
-        <pilot></pilot>
-        <source></source>
-        <target></target>
+        <flight_number>3</flight_number>
+        <pilot>ran</pilot>
+        <source>london</source>
+        <target>dubai</target>
         <times>
-            <the_mirror></the_mirror>
-            <landing></landing>
+            <the_mirror>13:00</the_mirror>
+            <landing>18:00</landing>
         </times>
     </flight>
 </terminal>
