@@ -188,46 +188,151 @@
 # ben.follow(chaim)
 # print(ben.following)
 # print(chaim.followers)
-import xmltodict
-import json
 
-xml_text = '''<fruit_story>
-    <fruit>
-        <name>mango</name>
-        <category>fruits</category>
-        <season>summer</season>
-        <form_of_eating>fresh</form_of_eating>
-        <price>3$</price>
-    </fruit>
-    <fruit>
-        <name>Carrot</name>
-        <category>vegetables</category>
-        <season>all year round</season>
-        <form_of_eating>fresh or cooked</form_of_eating>
-        <price>1$</price>
-    </fruit>
-    <fruit>
-        <name>eggplant</name>
-        <category>vegetables</category>
-        <season>all year round</season>
-        <form_of_eating>cooked</form_of_eating>
-        <price>1.5$</price>
-    </fruit>
-    <fruit>
-        <name>Pomelo</name>
-        <category>fruits</category>
-        <season>winter</season>
-        <form_of_eating>fresh</form_of_eating>
-        <price>1.5$</price>
-    </fruit>
-    <fruit>
-        <name>strawberry</name>
-        <category>fruits</category>
-        <season>summer</season>
-        <form_of_eating>fresh</form_of_eating>
-        <price>5$</price>
-    </fruit>
-</fruit_story>'''
 
-json_text = json.dumps(xmltodict.parse(xml_text), indent=4)
-print(json_text)
+# a = {3, 2, "l", 4, 44, 5, 44, "j", "asdfgh"}
+# a.add(6)
+# a.add("hjk")
+# print(a)
+# b = {}
+# if a != b:
+#     print(9)
+# # כתיבת משתנים לקובץ
+# my_list = [1, 2, 3, 4]
+# with open("my_file.txt", mode="w") as file:
+#     for item in my_list:
+#         file.write(str(item) + "\n")
+#
+# # קריאת משתנים מהקובץ
+# with open("my_file.txt", mode="r") as file:
+#     my_list = []
+#     for line in file:
+#         my_list.append(int(line.strip()))
+#     print(my_list)
+
+# class Kettle(object):
+#     def __init__(self, make, price):
+#         self.make = make
+#         self.price = price
+#         self.on = False
+#
+#
+# kenwood = Kettle("Kenwood", 8.99)
+# # print(kenwood.make)
+# # print(kenwood.price)
+#
+# kenwood.price = 12.75
+# # print(kenwood.price)
+#
+# hamilton = Kettle("Hamilton", 14.55)
+# print(hamilton.on)
+#
+# print("Models: {} = {}, {} = {}".format(kenwood.make, kenwood.price,
+#                                         hamilton.make, hamilton.price))
+
+
+# class Circle:
+#     def __init__(self, radius):
+#         self.radius = radius
+#
+#     def area(self):
+#         return 3.14 * self.radius ** 2
+#
+# c = Circle(5)
+# print(f"The area of the circle with radius {c.radius} is {c.area():.2f}")
+
+# import datetime
+# import pytz
+#
+#
+# class Account:
+#
+#     @staticmethod
+#     def _current_time():
+#         utc_time = datetime.datetime.utcnow()
+#         return pytz.utc.localize(utc_time)
+#
+#     ''' Simple account class with balance '''
+#
+#     def __init__(self, name, balance):
+#         self._name = name
+#         self.__balance = balance
+#         self.transaction_list = []
+#         print("Account created for " + self._name)
+#
+#     def deposit(self, amount):
+#         if amount > 0:
+#             self.__balance += amount
+#             self.transaction_list.append((pytz.utc.localize(datetime.datetime.utcnow()), amount))
+#             self.transaction_list.append((self._current_time(), amount))
+#             self.transaction_list.append((Account._current_time(), amount))
+#
+#     def withdraw(self, amount):
+#         if self.__balance >= amount:  # to avoid being a millionaire...
+#             self.__balance -= amount
+#             self.transaction_list.append((Account._current_time(), -amount))
+#         else:
+#             print("The amount must be <= than the current balance, which is: {}".format(self.__balance))
+#
+#     def show_balance(self):
+#         print("Balance is: {}".format(self.__balance))
+#
+#     def show_transactions(self):
+#         for date, amount in self.transaction_list:
+#             if amount > 0:
+#                 tran_type = "deposited"
+#             else:
+#                 tran_type = "withdrawn"
+#                 amount *= -1
+#             print("{:6} {} on {} (local time was {})".format(amount, tran_type, date, date.astimezone()))
+#
+#
+# chaim = Account("Chaim", 100)
+# chaim.deposit(100)
+# chaim.withdraw(200)
+# chaim.show_transactions()
+# chaim.show_balance()
+# # Function Signature -> name + parameter list + ret. val.
+# # Code Duplications
+# # DRY = Don't Repeat Yourself
+# # Static Methods (/functions)
+# # non-public (ksheyesh undersdcore mitahat lamishtane)
+# # Mangling
+# shmuel = Account("Shmuel", 800)
+# shmuel.deposit(100)
+# shmuel.withdraw(200)
+# shmuel.show_transactions()
+# shmuel.show_balance()
+#
+# shmuel.__balance = 300
+#
+# shmuel._Account__balance = 300
+#
+# shmuel.show_balance()
+# print(shmuel.__dict__)
+
+
+# class Song:
+#     def __init__(self, title, artist, duration=0):
+#         self.title = title
+#         self.artist = artist
+#         self.duration = duration
+#
+#     def get_title(self):
+#         return self.title
+#
+#     name = property(get_title)
+#
+#
+# s = Song(title="dance", artist="moshes")
+# print(s.name)
+
+from player import Player
+
+tim = Player("Tim")
+
+tim.level = 6
+tim.level -= 2
+tim.level += 1
+print(tim)
+

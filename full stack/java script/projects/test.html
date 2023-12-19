@@ -1,8 +1,61 @@
-
-
+<canvas id="myCanvas" width="400" height="300" style="border:1px solid;"></canvas>
+<br>
+<p>X:</p>
+<p id="x_value">--</p>
+<p>Y:</p>
+<p id="y_value">--</p>
 <script>
-    a = alert ("enter a number");
-    document.write(a + "<br/>");
-    document.write(a*2 + "<br/>");
+    //--------------------functions-----------------------
+    function keyDownEventHandler() {
+        if (event.keyCode == 40)
+            direction = "down";
+        if (event.keyCode == 38)
+            direction = "up";
+        if (event.keyCode == 37)
+            direction = "left";
+        if (event.keyCode == 39)
+            direction = "right";
+    }
+    function TimeEventHandler() {
+        if (direction == "right")
+            x += 20;
+        if (direction == "left")
+            x -= 20;
+        if (direction == "up")
+            y -= 20;
+        if (direction == "down")
+            y += 20;
+        document.getElementById("x_value").innerHTML = x;
+        document.getElementById("y_value").innerHTML = y;
+        //clean
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, 400, 300);
+        //draw player 
+        ctx.fillStyle = "black";
+        ctx.fillRect(x, y, 20, 20);
+        //draw bricks 
+        ctx.fillStyle = "blue";
+        for(var i=0 ; i<bricks.length ; i++){
+        ctx.fillRect(bricks[i].x, bricks[i].y, 20, 20);
+        if(x == bricks[i].x && y == bricks[i].y)
+            direction = "";}
+        //draw apples
+        ctx.fillStyle = "gold";
+        for(var j=0 ; j<bricks.length ; j++)
+        ctx.fillRect(apples[j].x, apples[j].y, 20, 20);
+
+
+        
+    }
+    //-----------------------------------------------------
+    ctx = document.getElementById('myCanvas').getContext('2d');
+    x = 100;
+    y = 100;
+    direction = "right";
+
+    bricks = new Array({ x: 100, y: 160 }, { x: 140, y: 200 }, { x: 180, y: 200 });
+    apples = new Array({ x: 40, y: 60 }, { x: 120, y: 260 }, { x: 80, y: 200 });
+
+    setInterval(TimeEventHandler, 300);
+    document.onkeydown = keyDownEventHandler;
 </script>
-    
