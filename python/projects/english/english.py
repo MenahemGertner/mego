@@ -11,16 +11,27 @@ new_words = []
 def save_file():
     file_v = [num, new_words, old_word, time]
     with open("save_location.txt", mode="w") as file:
+        # file.write(file_v)
         for item in file_v:
             file.write(str(item) + "\n")
 
 
 def open_file():
     with open("save_location.txt", mode="r") as file:
+        # file_v = file.read()
         file_v = []
         for line in file:
             file_v.append(line.strip())
     return file_v
+
+
+def applying_file(file_y):
+    num_y = int(file_y[0])
+    new_words_y = eval(file_y[1])
+    old_word_y = int(file_y[2])
+    old_time_y = file_y[3]
+    new_time_y = date.today()
+    return num_y, new_words_y, old_word_y, old_time_y, new_time_y
 
 
 def statistic(old_words_num):
@@ -41,24 +52,32 @@ def new_word(number, the_word):
     return knowing
 
 
-def ask_now():
-    pass
+def ask_know(old_word_list, number, list_wo, new_wo):
+    while True:
+        knows = new_word(number, list_wo)
+        if knows == "":
+            print("\nGreat!\n")
+            break
+        elif knows == "s".casefold():
+            statistic(old_word_list)
+        else:
+            # Creating a list of the unfamiliar words for repetition and memorization
+            new_wo.append(list_wo)
+            old_word_list += 1
+            # Instructions for memorizing the new words
+            chak_translation(list_wo)
+            memorization(old_word_list, new_wo)
+            break
+    return old_word_list, new_wo
 
 
-def old_words_repetition(old_word_list, new_words_list):
+def old_words_repetition(new_words_list):
     print(f"\n\n\nFirst, we'll go over the old words you had trouble with,"
           f"\nand then we'll go back to the list again to continue with the new words.")
     index = 0
     memorize = []
     for j, word in enumerate(new_words_list):
-        knowing = new_word(j, word)
-        if knowing == "":
-            print("\nGreat!\n")
-        else:
-            index += 1
-            memorize.append(word)
-            chak_translation(word)
-            memorization(index, memorize)
+        index, memorize = ask_know(index, j, word, memorize)
     print("\n\nExcellent! Now we will return to the list!\n")
     return index, memorize
 
@@ -98,13 +117,15 @@ def free_chak_translation(old_words_list):
         translate = input("You can check another word again. If you wish to continue press Enter ")
 
 
+# A message of encouragement after 20 words from the list
 def progress_message(num_now):
     if num_now > 0 and num_now % 20 == 0:
         print(f"👏🏼👏🏼👏🏼 You already know '{num_now}' words from the list!!! 👏🏼👏🏼👏🏼")
 
 
+# A message of encouragement after learning 5 new words
 def success_message(old_num):
-    if old_num % 5 == 0:
+    if old_num > 0 and old_num % 5 == 0:
         print(f"👏🏼👏🏼👏🏼 Wow!! Today you already learned '{old_num}' new words!!! 👏🏼👏🏼👏🏼")
 
 
@@ -118,37 +139,21 @@ if run == "r":
 elif run == "":
     print(f"\n{ascii.welcome_back}")
     file_x = open_file()
-    num = int(file_x[0])
-    new_words = eval(file_x[1])
-    old_word = int(file_x[2])
-    old_time = file_x[3]
-    new_time = date.today()
+    num, new_words, old_word, old_time, new_time = applying_file(file_x)
     if old_time != str(new_time):
-        old_word, new_words = old_words_repetition(old_word, new_words)
+        old_word, new_words = old_words_repetition(new_words)
 
 # A loop to go through all the words in the list one by one
 for i in range(num, len(list_word.words)):
     time = date.today()
     save_file()
-
-    # A message of encouragement after 20 words from the list
     progress_message(i)
-    know = new_word(num, list_word.words[i])
+    old_word, new_words = ask_know(old_word, num, list_word.words[i], new_words)
+    success_message(old_word)
     num += 1
-    if know == "":
-        print("\nGreat!\n")
-    elif know == "s".casefold():
-        statistic(old_word)
-    else:
-        # Creating a list of the unfamiliar words for repetition and memorization
-        new_words.append(list_word.words[i])
-        old_word += 1
-        # Instructions for memorizing the new words
-        chak_translation(list_word.words[i])
-        memorization(old_word, new_words)
-
-        # A message of encouragement after learning 5 new words
-        success_message(old_word)
 
 # End of the program
-print("Well done!! You have successfully learned all the words!!!!👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼")
+if old_word != 0:
+    print("amm.. you're almost done with the program.. come back tomorrow to repeat your last words..")
+else:
+    print("Well done!! You have successfully learned all the words!!!!👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼👏🏼")
