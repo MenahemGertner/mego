@@ -1,53 +1,62 @@
 <canvas id= "myCanvas" width="1250" height="650" style="border: 1px solid;"></canvas>
-
 <script>
 
-function Man_Moves(){
-
+// When the user clicks the right arrow, the interceptor and missiles will move to the right side.
+function Man_Moves(){  
     if (event.keyCode == 39 && interceptor_x < 1180){
         interceptor_x += 20;
         for(var k=0; k<missiles.length ; k++){
             if(missiles[k].y == interceptor_y)
                 missiles[k].x += 20; }
-        }
+    }
 
+// When the user clicks the left arrow, the interceptor and missiles will move to the left side.        
     if (event.keyCode == 37 && interceptor_x > 0){
         interceptor_x -= 20;
         for(var k=0; k<missiles.length ; k++){
             if(missiles[k].y == interceptor_y)
                 missiles[k].x -= 20; }
-        }
-  
-    if (event.keyCode == 32){
+    }
+ 
+// When the user presses space or enter, a missile will be sent from the interceptor.        
+    if (event.keyCode == 32 || event.keyCode == 13){
         if (missiles.some(missile => missile.y == interceptor_y)){
-            missiles.filter(missile => missile.y == interceptor_y)[0].y -= 1;
+            missiles.filter(missile => missile.y == interceptor_y)[0].y -= up;
     }}
-    // if (event.keyCode == 40) 
-    // t = 1;
-    // if (event.keyCode == 38) 
-    // t = 0;
 
-    // if (event.keyCode == 13) {
-    //         pause = false;             
-    //     }
+// When the user clicks the down arrow, the interceptor will move down.            
+    if (event.keyCode == 40 && n < 30){ 
+        n += 11.25;
+        m = 180 / n;
+        up -= 0.23;
+    }
 
+// When the user clicks the top arrow, the interceptor will move up.    
+    if (event.keyCode == 38 && n > 0){
+        n -= 11.25;
+        m = 180 / n;
+        up += 0.23;
+    }
 }
 
+// -----------------------------------------------------------------------
 
+// This function determines the flight path of the rockets.
 function Rocket_Direction(rocket_x, rocket_y) {
-// var a = 1; b = 1; c = 150;
 if (rocket_y > 100){
 //     rocket_x += a;
 //     rocket_y -= b; 
-//     if (rocket_x == c +25){
+//     if (rocket_x >= 600 && rocket_x < 603)
+//         c = 600
+//     if (rocket_x >= c + 25 && rocket_x < c +6){
 //         if (rocket_x < 300){
-//         a += 0.2;
-//         b -= 0.2;
-//         c = rocket_x;}
-//     else if (rocket_x < 600){
-//         a -= 0.2;
-//         b += 0.2;
-//         c = rocket_x;}
+//             a += 0.2;
+//             b -= 0.2;
+//             c = rocket_x;}
+//         if (rocket_x > 600){
+//             a -= 0.2;
+//             b += 0.2;
+//             c = rocket_x;}
 //     }}
     if (rocket_x < 175){
         rocket_x += 1;
@@ -108,9 +117,14 @@ else{
 }
 return [rocket_x, rocket_y];
 }
+
+// The central function of set interval.
 function Rocket_Aviation(){
-    ctx.drawImage(img_reka, 0, 0, 1250, 650);  
-     
+
+    // Background picture
+    ctx.drawImage(img_reka, 0, 0, 1250, 650); 
+
+    //  Text inside the canvas
     ctx.font = "30px Arial";
     ctx.fillStyle = "green";
     if (money < 500)
@@ -118,29 +132,83 @@ function Rocket_Aviation(){
     ctx.fillText("money: " + money + "$", 1020, 50);  
     ctx.fillStyle = "gold";
     ctx.fillText("level: " + level , 1020, 100);
-    for(var k=0; k<missiles.length ; k++){
-        ctx.drawImage(img_kb_rocket, missiles[k].x, missiles[k].y, 40, 40);
-        if (missiles[k].y != interceptor_y){
-            missiles[k].x -= 1;
-            missiles[k].y -= 2;
-            if(missiles[k].y < -40){
-                missiles[k].x = interceptor_x + 15; missiles[k].y = interceptor_y;
-                money -= 100;
-}}}
-    ctx.drawImage(img_kipat_barzel, interceptor_x, interceptor_y, 80, 80);
 
+    // Loop the missiles from the interceptor
+    for(var k=0; k<missiles.length ; k++){
+
+        // When the user launches a missile,
+        // the image rotates according to the position of the launcher and maintains the angle along the canvas.
+        if (missiles[k].y != interceptor_y){
+            ctx.save();
+            ctx.translate(missiles[k].x + 40, missiles[k].y + 40); 
+            
+            if ((570 - missiles[k].y) % 2 == 0){
+                missiles[k].x -= 1;
+                missiles[k].y -= 2;
+                ctx.rotate(-Math.PI / 180);
+            }
+            else if (((570 - missiles[k].y)*100).toFixed(2) % 177 == 0)
+            {
+                ctx.rotate(-Math.PI / 16);
+                missiles[k].x -= 1.23;
+                missiles[k].y -= 1.77;
+                
+            }
+            else if (((570 - missiles[k].y)*100).toFixed(2) % 154 == 0)
+            {
+                ctx.rotate(-Math.PI / 8);
+                missiles[k].x -= 1.46;
+                missiles[k].y -= 1.54;
+                if (missiles[k].y < 297.42 && missiles[k].y > 297.41 ||
+                    missiles[k].y < 24.85 && missiles[k].y > 24.83){
+                        missiles[k].y -= 1.54;
+            }
+            }
+            else if (((570 - missiles[k].y)*100).toFixed(2) % 131 == 0)
+            {
+                ctx.rotate(-Math.PI / 5.33);
+                missiles[k].x -= 1.69;
+                missiles[k].y -= 1.31;
+                if (missiles[k].y < 368.27 && missiles[k].y > 368.25 ||
+                    missiles[k].y < 338.14 && missiles[k].y > 338.12 ||
+                    missiles[k].y < 166.53 && missiles[k].y > 166.51 ||
+                    missiles[k].y < 106.27 && missiles[k].y > 106.25)
+                        missiles[k].y -= 1.31;   
+            }
+            
+            ctx.drawImage(img_kb_rocket, -40, -40, 40, 40);
+            ctx.restore();
+
+            // When the missile leaves the canvas, the condition will return it to the starting point,
+            // and also reduce the user money.
+            if(missiles[k].y < -40 || missiles[k].x < - 40){
+                missiles[k].x = interceptor_x + 15; missiles[k].y = interceptor_y;
+                money -= 50;
+        }}
+    }
+  
+    // A loop for actions on the rockets.
     for(var i=0, j=650 ; i<rockets.length ; i++){
+
+        // Determining the position for the start of the rocket flight.
         if (j<1300)
             j += 200;
         else
             j = 650;
+
+        // Picture of the rockets
         ctx.drawImage(img_rocket, rockets[i].x, rockets[i].y, 13, 13);
+
+        // A call to the function to determine the trajectory of the rockets.
         [rockets[i].x, rockets[i].y] = Rocket_Direction(rockets[i].x, rockets[i].y);
+
+        // Continue to the previous condition to determine the starting point of the flight.
         if (rockets[i].y > j){
             rockets[i].x = 0;
             rockets[i].y = Math.floor(Math.random()* 649);}
 
-        if (rockets[i].x > interceptor_x && rockets[i].x < interceptor_x +40 &&
+        // Disqualification when a rocket hits the interceptor.
+        if (rockets[i].x > interceptor_x && rockets[i].x < interceptor_x +60 &&
             rockets[i].y > interceptor_y && rockets[i].y < 650){
             audio_boom.play();
             alert('Game over!\nYour interceptor has been hit!');
@@ -148,19 +216,22 @@ function Rocket_Aviation(){
             level = 0;
             add_rocket = 0;
             rockets = new Array({x: 1300, y: 650});
-            missiles = new Array({x: interceptor_x + 15, y: interceptor_y}, {x: interceptor_x + 15, y: interceptor_y},
-                             {x: interceptor_x + 15, y: interceptor_y}, {x: interceptor_x + 15, y: interceptor_y})
+            missiles = new Array();
+            for (b = 0; b < counter; b++)
+                missiles.push({x: interceptor_x + 15, y: interceptor_y});
             play_again = confirm('Do you want play again?');
             if (play_again == false)
                 window.close();
-                rockets[i].x = 0; rockets[i].y = Math.floor(Math.random()* 649);
-
+            rockets[i].x = 0; rockets[i].y = Math.floor(Math.random()* 649);
         }
+
+        // When a rocket is not intercepted.
         if (rockets[i].y > 649 && rockets[i].y < 650)
             money -= 100;
 
+        // When a missile hits a rocket.
         for(var k=0; k<missiles.length ; k++){
-            if (rockets[i].x > missiles[k].x +5 && rockets[i].x < missiles[k].x +35 &&
+            if (rockets[i].x > missiles[k].x && rockets[i].x < missiles[k].x +40 &&
                 rockets[i].y > missiles[k].y && rockets[i].y < missiles[k].y +40){
                 if (missiles[k].y != interceptor_y){
                     audio_boom.play();           
@@ -170,47 +241,49 @@ function Rocket_Aviation(){
                     money += 100;
         }}}
         }
-        
+
+// A condition for moving to the next stage.
 if (money >= add_rocket + 400){
     audio_succes.play();
     rockets.push({x: 1300, y: 650});
     add_rocket = money;
     level += 1;
 }
+
+// Disqualification when the money runs out.
 if (money <= 0) {
     alert('Game over!\nYour money is gone!');
     money = 1000;
     level = 0;
     add_rocket = 0;   
     rockets = new Array({x: 1300, y: 650});
-    missiles = new Array({x: interceptor_x + 15, y: interceptor_y}, {x: interceptor_x + 15, y: interceptor_y},
-                             {x: interceptor_x + 15, y: interceptor_y}, {x: interceptor_x + 15, y: interceptor_y})
+    missiles = new Array();
+        for (b = 0; b < counter; b++)
+            missiles.push({x: interceptor_x + 15, y: interceptor_y});
     play_again = confirm('Do you want play again?');
     if (play_again == false)
         window.close(); 
 }
   
+// Rotation of the interceptor according to the user's click.
+if (n > 0){
+    ctx.save();
+    ctx.translate(interceptor_x + 40, interceptor_y + 40);
+    ctx.rotate(-Math.PI / m);
+    ctx.drawImage(img_kipat_barzel, -40, -40, 80, 80);
+    ctx.restore();
+}
+else
+ctx.drawImage(img_kipat_barzel, interceptor_x, interceptor_y, 80, 80);
 
-// if (pause == false)
-// throw new Error('Program paused');
-// else
-// runProgram(); 
-//if (t == 1){
-    // ctx.clearRect(interceptor_x, interceptor_y, 80, 80);
-    // ctx.save();
-    // ctx.translate(interceptor_x + 40, interceptor_y + 40);
-    // ctx.rotate(-Math.PI / 4);
-    // ctx.drawImage(img_kipat_barzel, -40, -40, 80, 80);
-    // ctx.restore();
-
-// }
-
+// Embedding the images within the function.
 img_rocket.src = "rocket.png";
 img_reka.src = "reka.jpeg";
 img_kipat_barzel.src = "kipat_barzel.png";
 img_kb_rocket.src = "kb_rocket.png";
 }
 
+// -------------------------------------------------------------------
     var ctx = document.getElementById('myCanvas').getContext('2d');
     
     var img_reka = new Image();
@@ -220,13 +293,16 @@ img_kb_rocket.src = "kb_rocket.png";
     var audio_boom = new Audio('boom.mp3');  
     var audio_succes = new Audio('succes.mp3');     
 
-    var interceptor_x = 700; interceptor_y = 570;
-    var missiles = new Array({x: interceptor_x + 15, y: interceptor_y}, {x: interceptor_x + 15, y: interceptor_y},
-                             {x: interceptor_x + 15, y: interceptor_y}, {x: interceptor_x + 15, y: interceptor_y})
-    var rockets = new Array({x: 0, y: 500})
+    var rockets = new Array({x: 0, y: 500});
+    var interceptor_x = 700; interceptor_y = 570; counter = 6;
+    var missiles = new Array();
+        for (b = 0; b < counter; b++)
+            missiles.push({x: interceptor_x + 15, y: interceptor_y});
 
     var money = 1000; add_rocket = 0; level = 0;
-    // var pause = true; t = 0;
+    var n = 0; m = 0;
+    var up = 2;
+    // var a = 1; b = 1; c = 150;
    
     set_interval = setInterval(Rocket_Aviation, 10);
     document.onkeydown = Man_Moves;

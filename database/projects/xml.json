@@ -1,0 +1,59 @@
+Exercise 1:
+
+database 1: fruit
+1.
+use fruit
+2.
+db.fruit.insert({
+    name: 'mango',
+    category: 'fruits',
+    season: 'summer',
+    form_of_eating: 'fresh'
+    price: 3
+  })
+3.
+db.fruit.insert([{
+    name: 'carrot',
+    category: 'vegetables',
+    season: 'year round',
+    form_of_eating: 'fresh or cooked'
+    price: 1
+  },
+  {
+    name: 'aggplant',
+    category: 'vegetables',
+    season: 'year round',
+    form_of_eating: 'cooked'
+    price: 1.5
+  },
+  {
+    name: 'pomelo',
+    category: 'fruits',
+    season: 'winter',
+    form_of_eating: 'fresh'
+    price: 1.5
+  },
+  {
+    name: 'strawberry',
+    category: 'fruits',
+    season: 'summer',
+    form_of_eating: 'fresh'
+    price: 5
+  }]
+  )
+4.
+db.fruit.find()
+
+
+
+Exercise 2:
+
+1. db.fruit.count()
+2. db.fruit.find().limit(1)
+   db.fruit.find().skip(db.fruit.find().count()-1)
+   db.fruit.find().limit(2)
+   db.fruit.find().skip(db.fruit.find().count()-2)
+3. db.fruit.find({name: 'Pomelo'})
+4. db.fruit.find({price: 3})
+5. db.fruit.find().sort({price: -1}).limit(1)
+   db.fruit.find().sort({price: 1}).limit(1)
