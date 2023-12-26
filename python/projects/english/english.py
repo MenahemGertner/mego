@@ -1,14 +1,17 @@
 import ascii
 import list_word
+import function
 import webbrowser
 from datetime import date
 
 num = 0
 old_word = 0
 new_words = []
+counter_num = 0
 
 
 def save_file():
+    time = date.today()
     file_v = [num, new_words, old_word, time]
     with open("save_location.txt", mode="w") as file:
         # file.write(file_v)
@@ -124,9 +127,13 @@ def progress_message(num_now):
 
 
 # A message of encouragement after learning 5 new words
-def success_message(old_num):
-    if old_num > 0 and old_num % 5 == 0:
+def success_message(old_num, counter):
+    if old_num > counter:
+        counter = old_num
+    if counter % 5 == 0:
         print(f"👏🏼👏🏼👏🏼 Wow!! Today you already learned '{old_num}' new words!!! 👏🏼👏🏼👏🏼")
+        counter += 1
+        return counter
 
 
 # Opening text
@@ -140,16 +147,16 @@ elif run == "":
     print(f"\n{ascii.welcome_back}")
     file_x = open_file()
     num, new_words, old_word, old_time, new_time = applying_file(file_x)
-    if old_time != str(new_time):
+    if old_time != str(new_time) and old_word > 0:
         old_word, new_words = old_words_repetition(new_words)
 
 # A loop to go through all the words in the list one by one
 for i in range(num, len(list_word.words)):
-    time = date.today()
     save_file()
     progress_message(i)
     old_word, new_words = ask_know(old_word, num, list_word.words[i], new_words)
-    success_message(old_word)
+    counter_num = success_message(old_word, counter_num)
+
     num += 1
 
 # End of the program
