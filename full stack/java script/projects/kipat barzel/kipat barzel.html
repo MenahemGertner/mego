@@ -1,27 +1,28 @@
 <canvas id= "myCanvas" width="1250" height="650" style="border: 1px solid;"></canvas>
+<script src="interceptor_mooves.js"></script>
 <script>
 
 // When the user clicks the right arrow, the interceptor and missiles will move to the right side.
-function Man_Moves(){  
+function Interceptor_Moves(){  
     if (event.keyCode == 39 && interceptor_x < 1180){
         interceptor_x += 20;
-        for(var k=0; k<missiles.length ; k++){
-            if(missiles[k].y == interceptor_y)
-                missiles[k].x += 20; }
+        for(var k=0; k<tamirs.length ; k++){
+            if(tamirs[k].y == interceptor_y)
+                tamirs[k].x += 20; }
     }
 
 // When the user clicks the left arrow, the interceptor and missiles will move to the left side.        
     if (event.keyCode == 37 && interceptor_x > 0){
         interceptor_x -= 20;
-        for(var k=0; k<missiles.length ; k++){
-            if(missiles[k].y == interceptor_y)
-                missiles[k].x -= 20; }
+        for(var k=0; k<tamirs.length ; k++){
+            if(tamirs[k].y == interceptor_y)
+                tamirs[k].x -= 20; }
     }
  
 // When the user presses space or enter, a missile will be sent from the interceptor.        
     if (event.keyCode == 32 || event.keyCode == 13){
-        if (missiles.some(missile => missile.y == interceptor_y)){
-            missiles.filter(missile => missile.y == interceptor_y)[0].y -= up;
+        if (tamirs.some(tamir => tamir.y == interceptor_y)){
+            tamirs.filter(tamir => tamir.y == interceptor_y)[0].y -= up;
     }}
 
 // When the user clicks the down arrow, the interceptor will move down.            
@@ -134,46 +135,46 @@ function Rocket_Aviation(){
     ctx.fillText("level: " + level , 1020, 100);
 
     // Loop the missiles from the interceptor
-    for(var k=0; k<missiles.length ; k++){
+    for(var k=0; k<tamirs.length ; k++){
 
         // When the user launches a missile,
         // the image rotates according to the position of the launcher and maintains the angle along the canvas.
-        if (missiles[k].y != interceptor_y){
+        if (tamirs[k].y != interceptor_y){
             ctx.save();
-            ctx.translate(missiles[k].x + 40, missiles[k].y + 40); 
+            ctx.translate(tamirs[k].x + 40, tamirs[k].y + 40); 
             
-            if ((570 - missiles[k].y) % 2 == 0){
-                missiles[k].x -= 1;
-                missiles[k].y -= 2;
+            if ((570 - tamirs[k].y) % 2 == 0){
+                tamirs[k].x -= 1;
+                tamirs[k].y -= 2;
                 ctx.rotate(-Math.PI / 180);
             }
-            else if (((570 - missiles[k].y)*100).toFixed(2) % 177 == 0)
+            else if (((570 - tamirs[k].y)*100).toFixed(2) % 177 == 0)
             {
                 ctx.rotate(-Math.PI / 16);
-                missiles[k].x -= 1.23;
-                missiles[k].y -= 1.77;
+                tamirs[k].x -= 1.23;
+                tamirs[k].y -= 1.77;
                 
             }
-            else if (((570 - missiles[k].y)*100).toFixed(2) % 154 == 0)
+            else if (((570 - tamirs[k].y)*100).toFixed(2) % 154 == 0)
             {
                 ctx.rotate(-Math.PI / 8);
-                missiles[k].x -= 1.46;
-                missiles[k].y -= 1.54;
-                if (missiles[k].y < 297.42 && missiles[k].y > 297.41 ||
-                    missiles[k].y < 24.85 && missiles[k].y > 24.83){
-                        missiles[k].y -= 1.54;
+                tamirs[k].x -= 1.46;
+                tamirs[k].y -= 1.54;
+                if (tamirs[k].y < 297.42 && tamirs[k].y > 297.41 ||
+                    tamirs[k].y < 24.85 && tamirs[k].y > 24.83){
+                        tamirs[k].y -= 1.54;
             }
             }
-            else if (((570 - missiles[k].y)*100).toFixed(2) % 131 == 0)
+            else if (((570 - tamirs[k].y)*100).toFixed(2) % 131 == 0)
             {
                 ctx.rotate(-Math.PI / 5.33);
-                missiles[k].x -= 1.69;
-                missiles[k].y -= 1.31;
-                if (missiles[k].y < 368.27 && missiles[k].y > 368.25 ||
-                    missiles[k].y < 338.14 && missiles[k].y > 338.12 ||
-                    missiles[k].y < 166.53 && missiles[k].y > 166.51 ||
-                    missiles[k].y < 106.27 && missiles[k].y > 106.25)
-                        missiles[k].y -= 1.31;   
+                tamirs[k].x -= 1.69;
+                tamirs[k].y -= 1.31;
+                if (tamirs[k].y < 368.27 && tamirs[k].y > 368.25 ||
+                    tamirs[k].y < 338.14 && tamirs[k].y > 338.12 ||
+                    tamirs[k].y < 166.53 && tamirs[k].y > 166.51 ||
+                    tamirs[k].y < 106.27 && tamirs[k].y > 106.25)
+                        tamirs[k].y -= 1.31;   
             }
             
             ctx.drawImage(img_kb_rocket, -40, -40, 40, 40);
@@ -181,8 +182,8 @@ function Rocket_Aviation(){
 
             // When the missile leaves the canvas, the condition will return it to the starting point,
             // and also reduce the user money.
-            if(missiles[k].y < -40 || missiles[k].x < - 40){
-                missiles[k].x = interceptor_x + 15; missiles[k].y = interceptor_y;
+            if(tamirs[k].y < -40 || tamirs[k].x < - 40){
+                tamirs[k].x = interceptor_x + 15; tamirs[k].y = interceptor_y;
                 money -= 50;
         }}
     }
@@ -216,9 +217,9 @@ function Rocket_Aviation(){
             level = 0;
             add_rocket = 0;
             rockets = new Array({x: 1300, y: 650});
-            missiles = new Array();
+            tamirs = new Array();
             for (b = 0; b < counter; b++)
-                missiles.push({x: interceptor_x + 15, y: interceptor_y});
+                tamirs.push({x: interceptor_x + 15, y: interceptor_y});
             play_again = confirm('Do you want play again?');
             if (play_again == false)
                 window.close();
@@ -230,14 +231,14 @@ function Rocket_Aviation(){
             money -= 100;
 
         // When a missile hits a rocket.
-        for(var k=0; k<missiles.length ; k++){
-            if (rockets[i].x > missiles[k].x && rockets[i].x < missiles[k].x +40 &&
-                rockets[i].y > missiles[k].y && rockets[i].y < missiles[k].y +40){
-                if (missiles[k].y != interceptor_y){
+        for(var k=0; k<tamirs.length ; k++){
+            if (rockets[i].x > tamirs[k].x && rockets[i].x < tamirs[k].x +40 &&
+                rockets[i].y > tamirs[k].y && rockets[i].y < tamirs[k].y +40){
+                if (tamirs[k].y != interceptor_y){
                     audio_boom.play();           
                     rockets[i].x = 0; rockets[i].y = Math.floor(Math.random()* 649);
-                    ctx.drawImage(img_rocket, missiles[k].x, missiles[k].y, 80, 80);
-                    missiles[k].x = interceptor_x + 15; missiles[k].y = interceptor_y;
+                    ctx.drawImage(img_rocket, tamirs[k].x, tamirs[k].y, 80, 80);
+                    tamirs[k].x = interceptor_x + 15; tamirs[k].y = interceptor_y;
                     money += 100;
         }}}
         }
@@ -257,9 +258,9 @@ if (money <= 0) {
     level = 0;
     add_rocket = 0;   
     rockets = new Array({x: 1300, y: 650});
-    missiles = new Array();
+    tamirs = new Array();
         for (b = 0; b < counter; b++)
-            missiles.push({x: interceptor_x + 15, y: interceptor_y});
+            tamirs.push({x: interceptor_x + 15, y: interceptor_y});
     play_again = confirm('Do you want play again?');
     if (play_again == false)
         window.close(); 
@@ -295,9 +296,9 @@ img_kb_rocket.src = "kb_rocket.png";
 
     var rockets = new Array({x: 0, y: 500});
     var interceptor_x = 700; interceptor_y = 570; counter = 6;
-    var missiles = new Array();
+    var tamirs = new Array();
         for (b = 0; b < counter; b++)
-            missiles.push({x: interceptor_x + 15, y: interceptor_y});
+            tamirs.push({x: interceptor_x + 15, y: interceptor_y});
 
     var money = 1000; add_rocket = 0; level = 0;
     var n = 0; m = 0;
@@ -305,6 +306,6 @@ img_kb_rocket.src = "kb_rocket.png";
     // var a = 1; b = 1; c = 150;
    
     set_interval = setInterval(Rocket_Aviation, 10);
-    document.onkeydown = Man_Moves;
+    document.onkeydown = Interceptor_Moves;
     
 </script>

@@ -1,13 +1,18 @@
 import ascii
 import list_word
-import function
+from learning_words import LearningWords
+from messages import Messages
+# from file import File
 import webbrowser
 from datetime import date
 
 num = 0
 old_word = 0
 new_words = []
-counter_num = 0
+counter_num = 1
+message = Messages
+# file = File
+learning = LearningWords(list_word.words)
 
 
 def save_file():
@@ -37,18 +42,6 @@ def applying_file(file_y):
     return num_y, new_words_y, old_word_y, old_time_y, new_time_y
 
 
-def statistic(old_words_num):
-    words_left = 1000 - num
-    percentage = round((num - old_words_num) / 10)
-    print(f"\n               statistics"
-          f"\n-------------------------------------------"
-          f"\n Words you have already learned: {num}"
-          f"\n Words still left: {words_left}"
-          f"\n Percentage of words you already know: {percentage}%"
-          f"\n New words you learned today: {old_words_num}"
-          f"\n-------------------------------------------\n")
-
-
 def new_word(number, the_word):
     print(f"\nYour new word is:\n\n{number + 1}. '{the_word}'")
     knowing = input("\nDo you know this word? If yes press Enter. If you are not sure, press 'n'.\n\n")
@@ -62,7 +55,7 @@ def ask_know(old_word_list, number, list_wo, new_wo):
             print("\nGreat!\n")
             break
         elif knows == "s".casefold():
-            statistic(old_word_list)
+            message.statistic(old_word_list, number)
         else:
             # Creating a list of the unfamiliar words for repetition and memorization
             new_wo.append(list_wo)
@@ -75,7 +68,7 @@ def ask_know(old_word_list, number, list_wo, new_wo):
 
 
 def old_words_repetition(new_words_list):
-    print(f"\n\n\nFirst, we'll go over the old words you had trouble with,"
+    print(f"\n\n\nFirst, we'll go over the: '{len(new_words_list)}' old words you had trouble with,"
           f"\nand then we'll go back to the list again to continue with the new words.")
     index = 0
     memorize = []
@@ -114,26 +107,10 @@ def free_chak_translation(old_words_list):
         if translate == "":
             break
         elif translate == "s".casefold():
-            statistic(old_words_list)
+            message.statistic(old_words_list, num)
         else:
             webbrowser.open(f"https://translate.google.co.il/?hl=iw&sl=en&tl=iw&text={translate}%0A&op=translate")
         translate = input("You can check another word again. If you wish to continue press Enter ")
-
-
-# A message of encouragement after 20 words from the list
-def progress_message(num_now):
-    if num_now > 0 and num_now % 20 == 0:
-        print(f"👏🏼👏🏼👏🏼 You already know '{num_now}' words from the list!!! 👏🏼👏🏼👏🏼")
-
-
-# A message of encouragement after learning 5 new words
-def success_message(old_num, counter):
-    if old_num > counter:
-        counter = old_num
-    if counter % 5 == 0:
-        print(f"👏🏼👏🏼👏🏼 Wow!! Today you already learned '{old_num}' new words!!! 👏🏼👏🏼👏🏼")
-        counter += 1
-        return counter
 
 
 # Opening text
@@ -153,10 +130,9 @@ elif run == "":
 # A loop to go through all the words in the list one by one
 for i in range(num, len(list_word.words)):
     save_file()
-    progress_message(i)
+    message.progress_message(i)
     old_word, new_words = ask_know(old_word, num, list_word.words[i], new_words)
-    counter_num = success_message(old_word, counter_num)
-
+    counter_num = message.success_message(old_word, counter_num)
     num += 1
 
 # End of the program
