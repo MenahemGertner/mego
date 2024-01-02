@@ -1,6 +1,6 @@
 import ascii
 import list_word
-from learning_words import LearningWords
+# from learning_words import LearningWords
 from messages import Messages
 # from file import File
 import webbrowser
@@ -12,7 +12,7 @@ new_words = []
 counter_num = 1
 message = Messages
 # file = File
-learning = LearningWords(list_word.words)
+# learning = LearningWords(list_word.words)
 
 
 def save_file():
