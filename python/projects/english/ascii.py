@@ -1,7 +1,7 @@
 opening = '''                /|  /|  ---------------------------
                 ||__||  |  Welcome to the program  |
-               /   O O\__  for learning the 1,000  |
-              /          \ useful words in English |
+               /   O O\__         to learn         |
+              /          \      English words      |
              /      \     \        easily!         |
             /   _    \     \ ----------------------
            /    |\____\     \      ||

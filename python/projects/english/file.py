@@ -1,48 +1,32 @@
-# class File:
-#     def save_file():
-#         time = date.today()
-#         file_v = [num, new_words, old_word, time]
-#         with open("save_location.txt", mode="w") as file:
-#             # file.write(file_v)
-#             for item in file_v:
-#                 file.write(str(item) + "\n")
-#
-#
-#     def open_file():
-#         with open("save_location.txt", mode="r") as file:
-#             # file_v = file.read()
-#             file_v = []
-#             for line in file:
-#                 file_v.append(line.strip())
-#         return file_v
-#
-#
-#     def applying_file(file_y):
-#         num_y = int(file_y[0])
-#         new_words_y = eval(file_y[1])
-#         old_word_y = int(file_y[2])
-#         old_time_y = file_y[3]
-#         new_time_y = date.today()
-#         return num_y, new_words_y, old_word_y, old_time_y, new_time_y
+from datetime import date
 
 
-class Car:
- def __init__(self, model):
-  self.model = model
-
- def say_hello(self):
-  return "Hello, I'm a {}".format(self.model)
-
-
-class SportsCar(Car):
- def __init__(self, model, sports_engine):
-  super().__init__(model)
-  self.sports_engine = sports_engine
-
- def over_drive(self):
-  return "Smashing it!! With my {} engine".format(self.sports_engine)
+class File:
+    def __init__(self, number, new_words, choose):
+        self.number = number
+        self.new_words = new_words
+        self.choose = choose
+        self.old_time = None
+        self.new_time = None
 
 
-sportsCar1 = SportsCar('Audi', 'V8')
-print(sportsCar1.say_hello())
-print(sportsCar1.over_drive())
+    def save_file(self):
+        time = date.today()
+        file_list = [self.number, self.new_words, time, self.choose]
+        with open("save.txt", mode="w") as file:
+            for item in file_list:
+                file.write(str(item) + "\n")
+
+    def open_file(self):
+        with open("save.txt", mode="r") as file:
+            file_list = []
+            for line in file:
+                file_list.append(line.strip())
+        self.number = int(file_list[0])
+        self.new_words = eval(file_list[1])
+        self.old_time = file_list[2]
+        self.choose = file_list[3]
+        self.new_time = date.today()
+
+    def location_word(self):
+        return self.new_words

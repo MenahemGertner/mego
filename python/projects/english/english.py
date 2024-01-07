@@ -54,8 +54,8 @@ def ask_know(old_word_list, number, list_wo, new_wo):
         if knows == "":
             print("\nGreat!\n")
             break
-        elif knows == "s".casefold():
-            message.statistic(old_word_list, number)
+        # elif knows == "s".casefold():
+            # message.statistic(old_word_list, number)
         else:
             # Creating a list of the unfamiliar words for repetition and memorization
             new_wo.append(list_wo)
@@ -106,8 +106,8 @@ def free_chak_translation(old_words_list):
     while True:
         if translate == "":
             break
-        elif translate == "s".casefold():
-            message.statistic(old_words_list, num)
+        # elif translate == "s".casefold():
+        #     message.statistic(old_words_list, num)
         else:
             webbrowser.open(f"https://translate.google.co.il/?hl=iw&sl=en&tl=iw&text={translate}%0A&op=translate")
         translate = input("You can check another word again. If you wish to continue press Enter ")
@@ -130,9 +130,9 @@ elif run == "":
 # A loop to go through all the words in the list one by one
 for i in range(num, len(list_word.words)):
     save_file()
-    message.progress_message(i)
+    # message.progress_message(i)
     old_word, new_words = ask_know(old_word, num, list_word.words[i], new_words)
-    counter_num = message.success_message(old_word, counter_num)
+    # counter_num = message.success_message(old_word, counter_num)
     num += 1
 
 # End of the program
