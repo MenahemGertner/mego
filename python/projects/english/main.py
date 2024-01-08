@@ -6,31 +6,55 @@ from file import File
 num = 0
 new_words = []
 
+# The opening of the program
 print(f"\n{ascii.opening}")
+
+# Continuation of the program or from the beginning.
 run_program = input("\nFeeling ready? Press Enter to continue!"
                     "\nIf you want to reset the program and start from the beginning press 'r': ")
-if run_program.casefold() == "r":
-    choose_list = input("\nFor the 1,000 most useful words in English write 'w',"
-                        "for useful words in high-tech write 'h': ")
-    print(f"\n\n{ascii.welcome}")
 
-else:
-    print(f"\n{ascii.welcome_back}")
-    files = File(number=None, new_words=None, choose=None)
-    files.open_file()
-    choose_list = files.choose
-    new_words = files.new_words
-    num = files.number
+while True:
+    # Choosing a dictionary to study.
+    if run_program.casefold() == "r":
+        print(f"\n\n{ascii.welcome}")
+        choose_list = input("\n\nFor the 1,000 most useful words in English write 'w'"
+                            "\nfor the 2,000 most useful words in English write 't'"
+                            "\nfor useful words in high-tech write 'h': ")
+        break
+    elif run_program == "":
+        print(f"\n{ascii.welcome_back}")
 
-    if files.old_time != str(files.new_time) and len(files.new_words) > 0:
-        learn = BackWords(files.new_words, num, new_words, choose_list)
-        learn.new_word()
+        # Opening the data and continuing the practice from the last end point.
+        files = File(number=None, new_words=None, choose=None)
+        files.open_file()
+        choose_list = files.choose
+        new_words = files.new_words
+        num = files.number
 
-if choose_list.casefold() == "w":
-    learn = LearningWords(list_word.words, num, new_words, choose_list)
-elif choose_list.casefold() == "h":
-    learn = LearningWords(list_word.high_tech, num, new_words, choose_list)
+        # When the current practice day is different from the previous practice day,
+        # the program repeats the words that require repetition.
+        if files.old_time == str(files.new_time) and len(files.new_words) > 0:
+            learn = BackWords(files.new_words, num, new_words, choose_list)
+            learn.new_word()
+        break
+    else:
+        run_program = input("\nPlease enter 'r' or press Enter: ")
 
+# The program selects the list that the user selected.
+while True:
+    if choose_list.casefold() == "w":
+        learn = LearningWords(list_word.words, num, new_words, choose_list)
+        break
+    elif choose_list.casefold() == "h":
+        learn = LearningWords(list_word.high_tech, num, new_words, choose_list)
+        break
+    elif choose_list.casefold() == "t":
+        learn = LearningWords(list_word.two_thousand_words, num, new_words, choose_list)
+        break
+    else:
+        choose_list = input("\nPlease enter w / h / t : ")
+
+# Learning the new words from the selected list.
 learn.new_word()
 
 # End of the program

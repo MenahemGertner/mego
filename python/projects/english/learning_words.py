@@ -4,6 +4,7 @@ from messages import Messages
 from file import File
 
 
+# The main class for learning words and their translation.
 class LearningWords:
 
     def __init__(self, words_list, number, new_words, choose_list):
@@ -13,6 +14,7 @@ class LearningWords:
         self.choose_list = choose_list
         self.message = Messages()
 
+    # A method that goes through the new words in the list and checks if the user knows the words.
     def new_word(self):
         while True:
             rev = True
@@ -20,7 +22,8 @@ class LearningWords:
                 if not rev:
                     break
                 files = File(self.number, self.new_words, self.choose_list)
-                files.save_file()
+                time_update = True
+                files.save_file(time_update)
                 self.message.progress_message(self.number)
                 self.number += 1
                 while True:
@@ -30,10 +33,11 @@ class LearningWords:
                         print("\nGreat!\n")
                         break
                     elif know.casefold() == "s":
-                        self.message.statistic(len(self.new_words), files.number)
+                        self.message.statistic(len(self.new_words), files.number, len(self.words_list))
                     elif know.casefold() == "n":
                         self.chak_translation(self.words_list[i])
                         break
+                    # When the user presses 'r', the program will go back a word in the list.
                     elif know.casefold() == "r" and self.number > 1:
                         self.number = i - 1
                         rev = False
@@ -44,6 +48,7 @@ class LearningWords:
             if self.number == len(self.words_list):
                 break
 
+    # The method translates the new word.
     def chak_translation(self, current_word):
         chak = input("Write the word and you can get its translation: ")
         while True:
@@ -54,6 +59,7 @@ class LearningWords:
         webbrowser.open(f"https://translate.google.co.il/?hl=iw&sl=en&tl=iw&text={current_word}%0A&op=translate")
         self.memorization(current_word)
 
+    # The method displays the new words the user is learning, for memorization purposes.
     def memorization(self, current_word):
         self.new_words.append(current_word)
         print(f"___________________________________________________________\n\n\n\n\n\n\n\n\n\n{ascii.remote}"
@@ -66,6 +72,7 @@ class LearningWords:
         self.free_chak_translation()
         print("\nExcellent! Now that you have memorized the word well, you can move on to the next word!")
 
+    # The method allows the user to translate words freely.
     def free_chak_translation(self):
         translate = input()
         while True:
@@ -76,6 +83,7 @@ class LearningWords:
             translate = input("You can check another word again. If you wish to continue press Enter ")
 
 
+# The purpose of the son class is to practice old words, and to make sure that the user does know them.
 class BackWords(LearningWords):
     def __init__(self, words_list, number, new_words, choose_list):
         super().__init__(words_list, number, new_words, choose_list)
@@ -86,6 +94,8 @@ class BackWords(LearningWords):
         self.first = 0
         self.last = 1
 
+    # The method goes through the words that the user did not know the previous time,
+    # and checks if he already knows them.
     def new_word(self):
         print(f"\n\n\nFirst, we'll go over the: '{len(self.new_words)}' old words you had trouble with,"
               f"\nand then we'll go back to the list again to continue with the new words.")
@@ -96,7 +106,8 @@ class BackWords(LearningWords):
                 if not rev:
                     break
                 files = File(self.num, self.new_words, self.choose_list)
-                files.save_file()
+                time_update = False
+                files.save_file(time_update)
                 self.number += 1
                 self.number2 += 1
                 while True:
@@ -104,6 +115,7 @@ class BackWords(LearningWords):
                                  "\n\nDo you know this word? If yes press Enter. If you are not sure, press 'n'.\n\n")
                     if know == "":
                         print("\nGreat!\n")
+                        # Deleting words that the user already knows from the list of new words.
                         files.new_words.remove(self.new_words[i])
                         self.old_word -= 1
                         self.number -= 1
@@ -118,6 +130,7 @@ class BackWords(LearningWords):
                 break
         print("\n\nExcellent! Now we will return to the list!\n")
 
+    # As in the parent class, but in this method the words appear from the beginning of the list to the end.
     def memorization(self, current_word):
         print(f"___________________________________________________________\n\n\n\n\n\n\n\n\n\n{ascii.remote}"
               f"\n\n\nThe last words: >>>>>-------------------->   '{', '.join(self.new_words[self.first:self.last])}'")
