@@ -16,7 +16,7 @@ class File:
         if time_update:
             time = date.today()
         else:
-            time = self.old_time
+            time = None
         file_list = [self.number, self.new_words, time, self.choose]
         with open("save.txt", mode="w") as file:
             for item in file_list:

@@ -26,14 +26,17 @@ class LearningWords:
                 files.save_file(time_update)
                 self.message.progress_message(self.number)
                 self.number += 1
+                know = input(f"\nYour new word is:\n\n{self.number}. '{self.words_list[i]}'"
+                             "\n\nDo you know this word? If yes press Enter. If you are not sure, press 'n'.\n\n")
                 while True:
-                    know = input(f"\nYour new word is:\n\n{self.number}. '{self.words_list[i]}'"
-                                 "\n\nDo you know this word? If yes press Enter. If you are not sure, press 'n'.\n\n")
                     if know == "":
                         print("\nGreat!\n")
                         break
                     elif know.casefold() == "s":
                         self.message.statistic(len(self.new_words), files.number, len(self.words_list))
+                        self.number = i - 0
+                        rev = False
+                        break
                     elif know.casefold() == "n":
                         self.chak_translation(self.words_list[i])
                         break
@@ -43,7 +46,7 @@ class LearningWords:
                         rev = False
                         break
                     else:
-                        print("Please, press n / s / r / Enter!")
+                        know = input("Please, press n / s / r / Enter! ")
                 self.message.success_message(len(self.new_words))
             if self.number == len(self.words_list):
                 break

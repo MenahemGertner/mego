@@ -1,8 +1,8 @@
 opening = '''                /|  /|  ---------------------------
-                ||__||  |  Welcome to the program  |
-               /   O O\__         to learn         |
-              /          \      English words      |
-             /      \     \        easily!         |
+                ||__||  |         Learning         |
+               /   O O\__         English          |
+              /          \        Easily!!         |
+             /      \     \                        |
             /   _    \     \ ----------------------
            /    |\____\     \      ||
           /     | | | |\____/      ||
