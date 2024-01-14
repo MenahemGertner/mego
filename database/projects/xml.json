@@ -8,7 +8,7 @@ db.fruit.insert({
     name: 'mango',
     category: 'fruits',
     season: 'summer',
-    form_of_eating: 'fresh'
+    form_of_eating: 'fresh',
     price: 3
   })
 3.
@@ -16,28 +16,28 @@ db.fruit.insert([{
     name: 'carrot',
     category: 'vegetables',
     season: 'year round',
-    form_of_eating: 'fresh or cooked'
+    form_of_eating: 'fresh or cooked',
     price: 1
   },
   {
     name: 'aggplant',
     category: 'vegetables',
     season: 'year round',
-    form_of_eating: 'cooked'
+    form_of_eating: 'cooked',
     price: 1.5
   },
   {
     name: 'pomelo',
     category: 'fruits',
     season: 'winter',
-    form_of_eating: 'fresh'
+    form_of_eating: 'fresh',
     price: 1.5
   },
   {
     name: 'strawberry',
     category: 'fruits',
     season: 'summer',
-    form_of_eating: 'fresh'
+    form_of_eating: 'fresh',
     price: 5
   }]
   )
@@ -57,3 +57,100 @@ Exercise 2:
 4. db.fruit.find({price: 3})
 5. db.fruit.find().sort({price: -1}).limit(1)
    db.fruit.find().sort({price: 1}).limit(1)
+
+
+  
+
+
+
+
+Exercise 3:  
+
+1. db.fruit.remove({price:5})
+2. db.fruit.update({name: 'pomelo'},
+  { $set:{
+    name: 'apple',
+    category: 'fruits',
+    season: 'year round',
+    form_of_eating: 'fresh or cooked',
+    price: 2
+  }})
+   db.fruit.update({name: 'carrot'},
+  { $set:{
+    name: 'tomato',
+    category: 'vegetables',
+    season: 'year round',
+    form_of_eating: 'fresh or cooked',
+    price: 1
+  }})
+3. db.fruit.update({name: 'mango'},{$set:{price: 4 }})
+
+
+
+
+
+Exercise 4:
+
+db.meals.insert(
+{
+    name: "shnizel",
+    meal_type: "lanch",
+    helth: "helthy",
+    time_meal (minute): 10
+} )
+
+db.meals.insert(
+{
+  name: "shawarma",
+  meal_type: "lanch",
+  helth: "junk food",
+  time_meal (minute): 15
+} )
+
+db.meals.insert(
+{
+    name: "sandwich",
+    meal_type: "breakfast",
+    helth: "helthy",
+    time_meal (minute): 12
+      with:
+          {
+          1: "eggs",
+          2: "vegetables",
+          3: "chocolate milk"
+          }
+} )
+
+db.meals.insert(
+{
+  name: "salad",
+  meal_type: "diner",
+  helth: "helthy",
+  time_meal (minute): 20
+    with:
+      {
+      1: "omelet",
+      2: "vegetables",
+      3: "fries"
+      }
+} )
+
+db.meals.remove({time_meal (minute): 15})
+
+db.meals.update({time_meal (minute): 12},{$set:{
+  with:
+    {
+    1: "salad",
+    2: "leben",
+    3: "tea"
+    }}})
+
+db.meals.update({time_meal (minute): 12},{$unset:{
+  with:
+    {
+    1: "",
+    2: "",
+    3: ""
+    }}})
+
+db.meals.find({"with.1":"omelet"})
