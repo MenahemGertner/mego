@@ -34,7 +34,7 @@ class LearningWords:
                         break
                     elif know.casefold() == "s":
                         self.message.statistic(len(self.new_words), files.number, len(self.words_list))
-                        self.number = i - 0
+                        self.number = i
                         rev = False
                         break
                     elif know.casefold() == "n":
@@ -113,9 +113,10 @@ class BackWords(LearningWords):
                 files.save_file(time_update)
                 self.number += 1
                 self.number2 += 1
+                know = input(f"\nYour new word is:\n\n{self.number2}. '{self.new_words[i]}'"
+                             "\n\nDo you know this word? If yes press Enter. If you are not sure, press 'n'.\n\n")
                 while True:
-                    know = input(f"\nYour new word is:\n\n{self.number2}. '{self.new_words[i]}'"
-                                 "\n\nDo you know this word? If yes press Enter. If you are not sure, press 'n'.\n\n")
+
                     if know == "":
                         print("\nGreat!\n")
                         # Deleting words that the user already knows from the list of new words.
@@ -128,7 +129,7 @@ class BackWords(LearningWords):
                         self.chak_translation(self.new_words[i])
                         break
                     else:
-                        print("Please, press 'n' or Enter!")
+                        know = input("Please, press 'n' or Enter!")
             if self.number >= len(self.new_words):
                 break
         print("\n\nExcellent! Now we will return to the list!\n")
