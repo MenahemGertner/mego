@@ -1,33 +1,37 @@
+// The most parts
+
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-int oppositeNumber(int num1) {
-	int num2 = 0, i;
-	for (i = 0; i < 3; i++) {
-		num2 *= 10;
-		num2 += num1 % 10;
-		num1 /= 10;
+int checkMax(int num) {
+	int i, counter = 0;
+	for (i = num - 1; i == 0; i--) {
+		if (num % i == 0)
+			counter += 1;
 	}
-	return num2;
+	return counter;
 }
 
-int reduction(int num1, int num2) {
-	int res = 0;
-	if (num1 > num2)
-		res = num1 - num2;
-	else
-		res = num2 - num1;
-	return res;
+void randomNumbers(int max) {
+	int number, i, res=0, max_number=0, max_dividtion = 0;
+	for (i = 0; i < 10; i++) {
+		number = rand() % (max)+1;
+		printf("The number %d is: %d", i, number);
+		res = checkMax(number);
+		if (max_dividtion < res) {
+			max_dividtion = res;
+			max_number = number;
+		}
+	}
+	printf("The number %d hase %d dividition", max_number, max_dividtion);
 }
+
 
 void main() {
-	int num, res = 0, small_num = 0, larg_num = 0;
-
+	srand(time(NULL));
+	int num;
 	printf("Enter a number: ");
 	scanf_s("%d", &num);
-	res = oppositeNumber(num);
-	small_num = reduction(res, num);
-	larg_num = oppositeNumber(small_num);
-	res = larg_num + small_num;
-	printf("%d", res);
-
+	randomNumbers(num);
 }
