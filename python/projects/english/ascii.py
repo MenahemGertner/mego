@@ -40,36 +40,19 @@ remote = '''           ⇓ After learning the meaning of the word ⇓
  -----------------------------------------------------------------'''
 
 
-class Coffee:
-    def _init_(self, name, kind, strength, price) :
-        self.name = name
-        self.kind = kind
-        self.strength = strength
-        self.price = price
+import  random
 
 
-def same_product(crr):
-    manufacturer_name = crr[0].name
-    for i in crr:
-        if manufacturer_name != i.name:
-            return False
-    return True
-
-
-def weak_sorts(crr, num):
+def uppercase(letter_list):
+    big_letter = []
     new_list = []
-    for i in crr:
-        if i.strength < num:
-            new_list.append(i)
-    return new_list
+    for i in letter_list:
+        if 91 > ord(i) > 64:
+            big_letter.append(i)
+    for i in range(len(letter_list)):
+        random.shuffle(big_letter)
+        new_list.append(big_letter[0])
+    print(''.join(new_list))
 
 
-def most_expensive(crr):
-    hi_price = 0
-    for i in crr:
-        if i.price > hi_price:
-            hi_price = i.price
-    return hi_price
-
-
-
+uppercase(input("Enter a string.. "))
