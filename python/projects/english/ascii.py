@@ -40,19 +40,23 @@ remote = '''           ⇓ After learning the meaning of the word ⇓
  -----------------------------------------------------------------'''
 
 
-import  random
 
+def elaborate_number(num1):
+    num2 = num1 - 1
+    counter = 0
+    while num2 > 0:
+        if num1 % num2 == 0:
+            counter += num2
+        num2 -= 1
+    if num1 == counter:
+        print(num1)
+        return True
 
-def uppercase(letter_list):
-    big_letter = []
-    new_list = []
-    for i in letter_list:
-        if 91 > ord(i) > 64:
-            big_letter.append(i)
-    for i in range(len(letter_list)):
-        random.shuffle(big_letter)
-        new_list.append(big_letter[0])
-    print(''.join(new_list))
+def check_elaborate(num):
+    count = 1
+    while num != 0:
+        if elaborate_number(count):
+            num -= 1
+        count += 1
 
-
-uppercase(input("Enter a string.. "))
+check_elaborate(int(input("Enter a number: ")))
