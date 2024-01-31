@@ -40,23 +40,3 @@ remote = '''           ⇓ After learning the meaning of the word ⇓
  -----------------------------------------------------------------'''
 
 
-
-def elaborate_number(num1):
-    num2 = num1 - 1
-    counter = 0
-    while num2 > 0:
-        if num1 % num2 == 0:
-            counter += num2
-        num2 -= 1
-    if num1 == counter:
-        print(num1)
-        return True
-
-def check_elaborate(num):
-    count = 1
-    while num != 0:
-        if elaborate_number(count):
-            num -= 1
-        count += 1
-
-check_elaborate(int(input("Enter a number: ")))

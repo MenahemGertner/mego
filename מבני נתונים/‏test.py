@@ -49,3 +49,4 @@ while temp != None:
     temp = temp.get_next()
 average = total / counter
 print(average)
+
