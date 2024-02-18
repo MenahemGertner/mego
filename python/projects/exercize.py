@@ -74,12 +74,64 @@ import random
 # print(what1(123))
 
 
+# list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# print(list[2:4])
+# print(list[1:7:3])
+# print(list[4:2])
+# print(list[2:4:-1])
+# print(list[4:2:-1])
+# print(list[::-2])
+# print(list[2:-2])
 
-list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(list[2:4])
-print(list[1:7:3])
-print(list[4:2])
-print(list[2:4:-1])
-print(list[4:2:-1])
-print(list[::-2])
-print(list[2:-2])
+
+class Coffee:
+    b = 0
+    def __init__(self, name, kind, strength, price):
+        self.name = name
+        self.kind = kind
+        self.strength = strength
+        self.price = price
+        Coffee.b += 1
+
+    def get_name(self):
+        return self.name
+
+    def get_strength(self):
+        return self.strength
+
+    def get_price(self):
+        return self.price
+
+    def display(self):
+        print(f"name: {self.name}, kind: {self.kind}, strength: {self.strength}, price: {self.price}")
+
+
+def same_products(crr):
+    name = crr[0]
+    for cr in crr:
+        if cr.get_name() != name.get_name():
+            return False
+    return True
+
+def weak_sorts(crr, num):
+    stran = []
+    for cr in crr:
+        if cr.get_strength() < num:
+            stran.append(cr)
+    return stran
+
+def most_expensive(crr):
+    expensive = 0
+    most_expensive = []
+    for cr in crr:
+        if cr.get_price() > expensive:
+            expensive = cr.get_price()
+    for cr in crr:
+        if cr.get_price() == expensive:
+            most_expensive.append(cr)
+    for i in most_expensive:
+        i.display()
+a = Coffee('ff', 'uy', 55, 44)
+print(a.b)
+a = Coffee('ff', 'uy', 55, 44)
+print(a.b)
