@@ -1,0 +1,33 @@
+.main-title {
+  color: aqua;
+  font-size: 60px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.link-section {
+  height: 500px;
+  width: fit-content;
+  background-color: aquamarine;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
+  row-gap: 30px;
+}
+
+.grid button {
+  height: 200px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.my-form {
+  gap: 20px;
+}

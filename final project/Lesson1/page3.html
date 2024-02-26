@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Page 3</title>
+  </head>
+  <body style="display: flex; align-items: center; justify-content: center">
+    <form class="column my-form">
+      <input type="text" placeholder="Name..." maxlength="8" />
+      <input type="email" placeholder="Email..." />
+      <input type="password" placeholder="Password" />
+      <input
+        type="text"
+        placeholder="Date of birth..."
+        onblur="this.type = 'text'"
+        onfocus="this.type = 'date'"
+      />
+    </form>
+  </body>
+</html>

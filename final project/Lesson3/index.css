@@ -1,0 +1,38 @@
+.navbar-container {
+  width: 100%;
+  height: 80px;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.link-list {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+}
+
+.link-list li {
+  display: table;
+  height: 100%;
+}
+
+.link {
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  height: 100%;
+  transition: all 300ms;
+  border-bottom: 0 solid;
+}
+
+.link:hover {
+  color: #e83c72;
+  border-bottom: 5px solid white;
+}

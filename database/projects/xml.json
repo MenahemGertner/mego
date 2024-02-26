@@ -154,3 +154,70 @@ db.meals.update({time_meal (minute): 12},{$unset:{
     }}})
 
 db.meals.find({"with.1":"omelet"})
+
+db.meals.update({ name: "salad" },
+{
+    $push:
+    {
+      last_date_for_use:
+        {
+            day: 14,
+            month: 8,
+            year: 2024
+        }
+    }
+})
+
+db.meals.update({ name: "sandwich" },
+{
+    $push:
+    {
+      last_date_for_use:
+        {
+            day: 05,
+            month: 2,
+            year: 2024
+        }
+    }
+})
+
+db.meals.update(
+    {name: "salad"},
+    {
+        $pull:{
+          last_date_for_use:
+                {
+                    day: 14,
+                    month: 8,
+                }
+        }
+    }
+)
+
+db.meals.update(
+    {name: "sandwich"},
+    {
+        $pull:{
+          last_date_for_use:  
+                {
+                    month: 2,
+                    year: 2024
+                }       
+        }
+    }
+)
+
+
+
+db.meals.update(
+    { name: "banana" },
+    {
+        $set: {
+            purchase: [
+                { day: 4, month: 7, year: 2022 },
+                { day: 5, month: 11, year: 2022 }
+            ]
+        }
+    }
+);
+

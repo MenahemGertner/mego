@@ -1,44 +1,56 @@
-############DEBUGGING#####################
+# # Taken from husano896's PR thread (slightly modified)
+# import pygame
+# from pygame.locals import *
+# pygame.init()
+# screen = pygame.display.set_mode((640, 480))
+# clock = pygame.time.Clock()
+#
+# def main():
+#    while True:
+#       for event in pygame.event.get():
+#             if event.type == QUIT:
+#                pygame.quit()
+#                return
+#             elif event.type == MOUSEWHEEL:
+#                print(event)
+#                print(event.x, event.y)
+#                print(event.flipped)
+#                print(event.which)
+#                # can access properties with
+#                # proper notation(ex: event.y)
+#       clock.tick(60)
+#
+# # Execute game:
+# main()
 
-# # Describe Problem
-# def my_function():
-#   for i in range(1, 20):
-#     if i == 20:
-#       print("You got it")
-# my_function()
+# הגדרת PyCharm:
+# התקן את PyCharm מהאתר הרשמי 2.
+# פתח את PyCharm וצור פרויקט חדש.
+# בגדרות הפרויקט, בחר את הגרסה הנכונה של Python ב-Project Interpreter.
+# באותו מקום, הוסף את הספריות הצד ג’ הבאות: pyqt5, pyqt5-sip, ו-pyqt5-tools.
+# הגדרת QtDesigner:
+# התקן את QtDesigner (כלי לעיצוב ממשקי משתמש) מהאתר הרשמי.
+# ב-PyCharm, בגדרות הכלי החיצוניים, הוסף את QtDesigner והגדר את הנתיב לקובץ המבוצע (לדוגמה: designer.exe).
+# גם קובץ ה-troubleshooting שלי יכול לעזור לך בהגדרה המדויקת של QtDesigner.
+# הגדרת PyUIC:
+# התקן את PyUIC (כלי להמרת קבצי .ui לקוד Python) מהאתר הרשמי.
+# ב-PyCharm, בגדרות הכלי החיצוניים, הוסף את PyUIC והגדר את הנתיב לקובץ המבוצע (לדוגמה: python.exe).
+# גם קובץ ה-troubleshooting שלי יכול לעזור לך בהגדרה המדויקת של PyUIC.
 
-# # Reproduce the Bug
-# from random import randint
-# dice_imgs = ["1", "2", "3", "4", "5", "6"]
-# dice_num = randint(1, 6)
-# print(dice_imgs[dice_num])
+from flask import Flask, render_template
 
-# # Play Computer
-# year = int(input("What's your year of birth?"))
-# if year > 1980 and year < 1994:
-#   print("You are a millenial.")
-# elif year > 1994:
-#   print("You are a Gen Z.")
+app = Flask(__name__)
 
-# # Fix the Errors
-# age = input("How old are you?")
-# if age > 18:
-# print("You can drive at age {age}.")
 
-# #Print is Your Best Friend
-# pages = 0
-# word_per_page = 0
-# pages = int(input("Number of pages: "))
-# word_per_page == int(input("Number of words per page: "))
-# total_words = pages * word_per_page
-# print(total_words)
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-# #Use a Debugger
-# def mutate(a_list):
-#   b_list = []
-#   for item in a_list:
-#     new_item = item * 2
-#   b_list.append(new_item)
-#   print(b_list)
 
-# mutate([1,2,3,5,8,13])
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
