@@ -8,5 +8,11 @@
     <body>
         <h1>This is the about page</h1>
         <p>welcome to the about page</p>
+    <ul>
+        {% for social in sites %}
+        <li>{{ social }}</li>
+        {% endfor %}
+    </ul>
+
     </body>
 </html>

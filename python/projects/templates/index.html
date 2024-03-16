@@ -12,7 +12,20 @@
                 <h1>Welcome to my flask app! </h1>
                 <p>Flask is a framework for building backends for web </p>
                 <a href="{{url_for('about')}}">about page</a>
+                <a href="{{url_for('welcome')}}">welcome page</a>
+
             </main>
+
+
+            <h1>Enter your age:</h1>
+        <form method="POST" action="/">
+            <input type="number" name="age">
+            <input type="submit" value="Check">
+        </form>
+            <p>{{ message }}</p>
+            <a href="{{url_for('english')}}">english page</a>
+
         </div>
+
     </body>
 </html>

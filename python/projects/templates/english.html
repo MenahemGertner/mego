@@ -1,0 +1,28 @@
+<! DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/index.css" />
+        <title>Learn English Easily</title>
+    </head>
+    <body>
+        <div class="start">
+            <h1>Learn English Easily</h1>
+            <h3 {% if hide_buttons %}style="display:none;"{% endif %}>Feeling ready?</h3>
+
+            <form method="post">
+            <button name="button_pressed" value="start" {% if hide_buttons %}style="display:none;"{% endif %}>להתחיל מההתחלה</button>
+            <button name="button_pressed" value="continue" {% if hide_buttons %}style="display:none;"{% endif %}>להמשיך מאותו הנקודה</button>
+         </form>
+            <p>{{ messages }}</p>
+            <form method="post">
+            <button name="button" value="1000_words"{% if not hide_button %}style="display:none;"{% endif %}>1000 מילים</button>
+            <button name="button" value="2000_words"{% if not hide_button %}style="display:none;"{% endif %}>2000 מילים</button>
+            <button name="button" value="hitec"{% if not hide_button %}style="display:none;"{% endif %}>מילון הייטק</button>
+             </form>
+                <p>{{ options }}</p>
+        </div>
+
+    </body>
+</html>

@@ -5,3 +5,27 @@
     align-items: center;
     justify-content: center;
 }
+
+.start{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+}
+
+.start title{
+    color: green;
+    text-decoration-line: underline;
+    text-decoration-color: blue;
+}
+
+.start button{
+    pending: 0;
+    margin: 5px;
+    display: flex;
+  flex-direction: row;
+  background-color: green;
+  height: 60px;
+  align-items: center;
+  wight: 100%;
+}
